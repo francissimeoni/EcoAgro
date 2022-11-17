@@ -9,7 +9,13 @@ import java.util.Date;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -151,6 +157,28 @@ public class UsuariosServicios {
 
     /////// ----> funciones de user detail service
     public void UserDetailDetail() {
+
+    }
+    
+    
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        Usuarios usuario = uR.buscarPorEmail(email);
+
+        if (usuario != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList();
+
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+            permisos.add(p);
+
+            User user = new User(usuario.getUsuario(), usuario.getContraseña(), permisos);
+
+            return user;
+
+        } else {
+            return null;
+        }
 
     }
 
