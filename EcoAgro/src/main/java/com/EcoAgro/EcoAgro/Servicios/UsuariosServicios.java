@@ -130,7 +130,7 @@ public class UsuariosServicios {
 
         return arr;
     }
-*/
+     */
     /////// ----> fin de consultas
     /////// ----> validaciones
     public void validaciones(String usuario, String contraseña,
@@ -141,11 +141,11 @@ public class UsuariosServicios {
         }
 
         if (contraseña.equalsIgnoreCase("")) {
-            throw new Excepciones("Para registrarse debe brindar un nombre de contraseña");
+            throw new Excepciones("要註冊，您必須提供密碼");//Para registrarse debe brindar una contraseña
         }
 
         if (correo.toString().equalsIgnoreCase("")) {
-            throw new Excepciones("Para registrarse debe brindar un ncorreo electronico");
+            throw new Excepciones("Para registrarse debe brindar un correo electronico");
         }
 
         if (telefono.equalsIgnoreCase("")) {
@@ -159,27 +159,45 @@ public class UsuariosServicios {
     public void UserDetailDetail() {
 
     }
-    
-    
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Usuarios usuario = uR.buscarPorEmail(email);
+    public UserDetails LogearUsuarioSpring(Usuarios usuario) throws UsernameNotFoundException {
 
-        if (usuario != null) {
+        List<GrantedAuthority> permisos = new ArrayList();
 
-            List<GrantedAuthority> permisos = new ArrayList();
+        GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+        permisos.add(p);
 
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-            permisos.add(p);
+        User user = new User(usuario.getUsuario(), usuario.getContraseña(), permisos);
 
-            User user = new User(usuario.getUsuario(), usuario.getContraseña(), permisos);
-
-            return user;
-
-        } else {
-            return null;
-        }
+        return user;
 
     }
 
+    public Boolean usuarioLogin(String parametroUsr, String contraseña) throws Excepciones {
+
+        validaciones(parametroUsr, contraseña, "+", "+");
+
+        Usuarios usuario = uR.buscarPorEmailoUsuario(parametroUsr);
+
+        if (usuario.getCorreo().equalsIgnoreCase("")) {
+
+            System.out.println("el usuario" + parametroUsr + "no existe");
+            return false;
+
+        } else {
+            System.out.println("el usuario" + parametroUsr + " existe");
+            if (!usuario.getContraseña().equals(contraseña)) {
+                System.out.println("clave de usuario:" + usuario.getContraseña() + ", parametro enviado de clave " + contraseña);
+                LogearUsuarioSpring(usuario);
+
+                return true;
+            } else {
+                System.out.println("error de contraseñas");
+                System.out.println("clave de usuario:" + usuario.getContraseña() + ", parametro enviado de clave " + contraseña);
+                return false;
+
+            }
+
+        }
+    }
 }
