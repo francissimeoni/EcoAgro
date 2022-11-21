@@ -10,16 +10,21 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
-public class UsuariosServicios {
+public class UsuariosServicios implements UserDetailsService {
 
     @Autowired
     UsuariosRepositorio uR;
@@ -32,9 +37,10 @@ public class UsuariosServicios {
         Usuarios ObjUsuarios = new Usuarios();
 
         validaciones(Usuario, Contraseña, correo, telefono);
+        //SeguridadDeClave(Contraseña);
 
         ObjUsuarios.setUsuario(Usuario);
-        ObjUsuarios.setContraseña(Contraseña);
+        ObjUsuarios.setContraseña(new BCryptPasswordEncoder().encode(Contraseña));
         ObjUsuarios.setRol(rol);
         ObjUsuarios.setZonas(zonas);
         ObjUsuarios.setFechaDeRegistro(fechaDeRegistro);
@@ -54,7 +60,7 @@ public class UsuariosServicios {
 
         ObjUsuarios = ObtenerUsuariosPorId(id);
         ObjUsuarios.setUsuario(Usuario);
-        ObjUsuarios.setContraseña(Contraseña);
+        ObjUsuarios.setContraseña(new BCryptPasswordEncoder().encode(Contraseña));;
         ObjUsuarios.setRol(rol);
         ObjUsuarios.setZonas(zonas);
         ObjUsuarios.setFechaDeRegistro(fechaDeRegistro);
@@ -115,89 +121,209 @@ public class UsuariosServicios {
         return arrUs;
     }
 
-    /*
-    public ArrayList<Usuarios> DevolverUsuariosActivos() {
-        ArrayList<Usuarios> arr = new ArrayList<>();
-
-        arr = uR.RetornarActivos();
-
-        return arr;
-    }
-
-    public ArrayList<Usuarios> DevolverUsuariosInactivos() {
-        ArrayList<Usuarios> arr = new ArrayList<>();
-        arr = uR.RetornarInactivos();
-
-        return arr;
-    }
-     */
-    /////// ----> fin de consultas
-    /////// ----> validaciones
-    public void validaciones(String usuario, String contraseña,
-            String correo, String telefono) throws Excepciones, Excepciones {
-
-        if (usuario.equalsIgnoreCase("")) {
-            throw new Excepciones("Para registrarse debe brindar un nombre de usuario");
-        }
-
-        if (contraseña.equalsIgnoreCase("")) {
-            throw new Excepciones("要註冊，您必須提供密碼");//Para registrarse debe brindar una contraseña
-        }
-
-        if (correo.toString().equalsIgnoreCase("")) {
-            throw new Excepciones("Para registrarse debe brindar un correo electronico");
-        }
-
-        if (telefono.equalsIgnoreCase("")) {
-            throw new Excepciones("Para registrarse debe brindar un telefono");
-        }
-
-    }
-    /////// ----> fin validaciones
-
     /////// ----> funciones de user detail service
-    public void UserDetailDetail() {
+    /////// ----> login
+    
+    
+    
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        Usuarios usuario = uR.buscarPorEmailoUsuario(username);
+
+        if (usuario != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList();
+
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+            permisos.add(p);
+
+            //una vez que ya se logueo, guardamos el usuario para utilizar sus datos durante la sesion
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+
+            session.setAttribute("SesionDeUsuario", usuario);
+
+            User user = new User(usuario.getUsuario(), usuario.getContraseña(), permisos);
+            return user;
+        } else {
+            return null;
+        }
 
     }
 
-    public UserDetails LogearUsuarioSpring(Usuarios usuario) throws UsernameNotFoundException {
-
-        List<GrantedAuthority> permisos = new ArrayList();
-
-        GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
-        permisos.add(p);
-
-        User user = new User(usuario.getUsuario(), usuario.getContraseña(), permisos);
-
-        return user;
-
-    }
-
+    
+    
+    
+    
     public Boolean usuarioLogin(String parametroUsr, String contraseña) throws Excepciones {
 
         validaciones(parametroUsr, contraseña, "+", "+");
 
         Usuarios usuario = uR.buscarPorEmailoUsuario(parametroUsr);
 
-        if (usuario.getCorreo().equalsIgnoreCase("")) {
+        if (usuario == null) {
 
-            System.out.println("el usuario" + parametroUsr + "no existe");
             return false;
 
         } else {
-            System.out.println("el usuario" + parametroUsr + " existe");
-            if (!usuario.getContraseña().equals(contraseña)) {
-                System.out.println("clave de usuario:" + usuario.getContraseña() + ", parametro enviado de clave " + contraseña);
-                LogearUsuarioSpring(usuario);
+
+            if (usuario.getContraseña().equalsIgnoreCase(contraseña)) {
+
+                System.out.println("Usuario logueado");
+                loadUserByUsername(usuario.getUsuario());
 
                 return true;
             } else {
-                System.out.println("error de contraseñas");
-                System.out.println("clave de usuario:" + usuario.getContraseña() + ", parametro enviado de clave " + contraseña);
+                  System.out.println("Usuario no logueado");
                 return false;
 
             }
 
         }
     }
+    /////// ----> final login
+
+/////// ----> validaciones
+    public void validaciones(String usuario, String contraseña,
+            String correo, String telefono) throws Excepciones, Excepciones {
+
+        if (usuario.equalsIgnoreCase("")) {
+            throw new Excepciones("El campo usuario no puede estar vacio");
+        }
+
+        if (contraseña.equalsIgnoreCase("")) {
+            throw new Excepciones("El campo contraseña no puede estar vacio");
+        }
+
+        if (correo.toString().equalsIgnoreCase("")) {
+            throw new Excepciones("El campo de correo electronico no puede estar vacio");
+        }
+
+        if (telefono.equalsIgnoreCase("")) {
+            throw new Excepciones("El campo telefono no puede estar vacio");
+        }
+
+    }
+
+    public void SeguridadDeClave(String clave) throws Excepciones {
+
+        if (!scannerPassword(clave)) {
+            throw new Excepciones(("La contraseña debe contener por lo menos un signo, una mayuscula y una longitud minima de 8 caracteres."));
+        }
+    }
+
+    public Boolean scannerPassword(String Pass) {
+
+        Integer contadorDeCaracteres = Pass.length();
+        Boolean CaracterEspecial = false;
+        Boolean CaracterMayuscula = false;
+        Boolean CaracterNumerico = false;
+        Boolean CaracterMinuscula = false;
+        String Caracter;
+
+        for (int i = 0; i < Pass.length() - 1; i++) {
+
+            Caracter = Pass.substring(i, i + 1);
+
+            if (CaracterEspecial == false) {
+                CaracterEspecial = ControlarCaracteresEspeciales(Caracter);
+            }
+
+            if (CaracterNumerico == false) {
+                CaracterNumerico = Caracter.matches("[0-9]*");
+            }
+
+            if (CaracterMayuscula == false) {
+                if (Caracter.equals(Caracter.toUpperCase())) {
+                    CaracterMayuscula = true;
+                }
+            }
+
+            if (CaracterMinuscula == false) {
+                if (Caracter.equals(Caracter.toLowerCase())) {
+                    CaracterMinuscula = true;
+                }
+            }
+
+        }
+
+        if (contadorDeCaracteres < 8 || CaracterEspecial == false || CaracterNumerico == false
+                || CaracterMayuscula == false || CaracterMinuscula == false) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public Boolean ControlarCaracteresEspeciales(String Caracter) {
+
+        Boolean val = false;
+
+        switch (Caracter) {
+            case "!":
+                val = true;
+                break;
+            case "|":
+                val = true;
+                break;
+            case "@":
+                val = true;
+                break;
+            case "#":
+                val = true;
+                break;
+            case "$":
+                val = true;
+                break;
+            case "¡":
+                val = true;
+                break;
+            case "%":
+                val = true;
+                break;
+            case "/":
+                val = true;
+                break;
+            case "(":
+                val = true;
+                break;
+            case ")":
+                val = true;
+                break;
+            case "=":
+                val = true;
+                break;
+            case "?":
+                val = true;
+                break;
+            case "¿":
+                val = true;
+                break;
+            case "°":
+                val = true;
+                break;
+            case "¬":
+                val = true;
+                break;
+            case "*":
+                val = true;
+                break;
+            case "+":
+                val = true;
+                break;
+            case "-":
+                val = true;
+                break;
+            default:
+                val = false;
+                break;
+        }
+
+        return val;
+
+    }
+
+    /////// ----> fin validaciones
 }

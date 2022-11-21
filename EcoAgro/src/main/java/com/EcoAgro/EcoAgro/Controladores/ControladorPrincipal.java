@@ -1,14 +1,20 @@
 package com.EcoAgro.EcoAgro.Controladores;
 
+import com.EcoAgro.EcoAgro.Entidades.Usuarios;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import com.EcoAgro.EcoAgro.Servicios.UsuariosServicios;
 import com.EcoAgro.EcoAgro.Servicios.ZonasServicios;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -20,14 +26,14 @@ public class ControladorPrincipal {
     @Autowired
     ZonasServicios zS;
 
-    @GetMapping("/Userlogin")
-    public String LogearUsuario(String usr, String pass) throws Excepciones {
+    @PostMapping("/Loguearse")
+    public String LogearUsuario(@RequestParam String user, @RequestParam String password) throws Excepciones {
 
-        System.out.println(usr + " " + pass);
+        System.out.println(user + " " + password);
 
-        if (uS.usuarioLogin(usr, pass) == true) {
+        if (uS.usuarioLogin(user, password) == true) {
             return "bienvendios.html";
-
+       
         } else {
             return null;
 
@@ -35,6 +41,7 @@ public class ControladorPrincipal {
 
     }
 
+    @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
     @GetMapping("/CrearZona")
     public void CrearZona() throws Excepciones {
 
@@ -49,20 +56,36 @@ public class ControladorPrincipal {
 
         // return "index.html";
         
-        */
+         */
     }
 
     @GetMapping("/CrearUsuario")
-    public void CrearUsuario() throws Excepciones {
+    public void CrearUsuario(@RequestParam String usr, @RequestParam String pass, @RequestParam String email, @RequestParam String telefono) throws Excepciones {
 
-       /*
-        
-        uS.CrearUsuario("Francis_simeoni", "Edurdo75", Rol.ADMINISTRADOR, zS.ObtenerDatosDeZonaPorId("1"), null, "fransissimeoni75@gmail.com", "03482-222779", true);
-        uS.CrearUsuario("Daniel_Masin", "27422379", Rol.PRODUCTOR, zS.ObtenerDatosDeZonaPorId("2"), null, "masdaniel31@gmail.com", "03482-430416", true);
-        uS.CrearUsuario("Israel_Poveda", "123456", Rol.USUARIO, zS.ObtenerDatosDeZonaPorId("3"), null, "masdaniel31@gmail.com", "03482-430416", true); //new Date(Long.getLong("2/6/2022"))
+        System.out.println("usr");
+        uS.CrearUsuario(usr, pass, Rol.ADMINISTRADOR, zS.ObtenerDatosDeZonaPorId("1"), null, email, telefono, true);
 
         // return "index.html";
-        
-        */
     }
+
+    @GetMapping("/PaginaPrincipal")
+    public String PaginaPrincipal(HttpSession session) {
+
+        Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
+
+       /* if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
+            return "redirect:/admin/dashboard";
+        }
+*/
+        return "index.html";
+
+    }
+
+    @GetMapping("/login")
+    public String PaginaLogin(){
+    
+        return "login.html";
+    }
+    
+    
 }
