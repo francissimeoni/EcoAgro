@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+
+
+    <body>
+
+        <form name="loginForm" action="/loguearse" method="POST">
+
+            <input type="text" name="user" value="" placeholder="escriba su usuario"/>
+            <br>
+            <input type="text" name="password" value="" placeholder="escriba su contraseña" />
+            <br>
+            <input type="submit" value="Loguearse" name="btn" />
+
+        </form>    
+
+    </body>
+</html>

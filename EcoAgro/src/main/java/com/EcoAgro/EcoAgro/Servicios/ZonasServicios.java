@@ -6,18 +6,17 @@ import java.util.ArrayList;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ZonasServicios {
-
-    @Autowired
-    Zonas Objzonas = new Zonas();
 
     @Autowired
     ZonasRepositorio zR;
 
     @Transactional
     public void CrearZona(String nombreZona) {
-
+        Zonas Objzonas = new Zonas();
         Objzonas.setNombre(nombreZona);
         zR.save(Objzonas);
 
@@ -25,6 +24,7 @@ public class ZonasServicios {
 
     @Transactional
     public void ModificarZona(String id, String nombreZona) {
+        Zonas Objzonas = new Zonas();
         Objzonas = ObtenerDatosDeZonaPorId(id);
         Objzonas.setNombre(nombreZona);
         zR.save(Objzonas);
@@ -32,6 +32,7 @@ public class ZonasServicios {
 
     @Transactional
     public void EliminarZona(String id) {
+        Zonas Objzonas = new Zonas();
         Objzonas.setNombre(id);
         zR.save(Objzonas);
     }
@@ -58,6 +59,6 @@ public class ZonasServicios {
     }
 
     public void validaciones(String nombrezona) {
-    
+
     }
 }
