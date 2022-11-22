@@ -37,8 +37,8 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/loguearse")
-                .usernameParameter("user")
-                .passwordParameter("pasword")
+                .usernameParameter("usr")
+                .passwordParameter("pass")
                 .defaultSuccessUrl("/PaginaPrincipal")
                 .permitAll()
                 
