@@ -1,0 +1,319 @@
+*{  font-family: 'Roboto', sans-serif; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0%;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+header{
+    
+    background-color: #88d166 ;
+    min-height: 70px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    
+    
+}
+h2.logo-nombre{
+    text-align: 200px;
+    margin-left: -0.9px;
+}
+.Logo{
+    display: flex;
+    align-items: center;
+    
+}
+.logo-img{
+    height: 80px;
+    margin-right: 12px;
+    z-index: 1;
+    margin-left: 8px;
+    margin: 10px;
+}
+nav a{
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    padding-right: 50px;
+    text-align: center;
+    background-color:rgb(255, 255, 255) ;
+    border-radius: 5px;
+    padding: 12px;
+}
+nav a:hover{
+    color: rgb(151, 255, 92);
+    border-style:solid;
+    border-width: 2px;
+    
+}
+@media (max-width:700px){
+    header{
+        flex-direction: column;
+    }
+    nav{
+        padding: 10px 0px;
+    }
+}
+.circulo{
+    background-color: #ffffff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: -120px;
+    position: relative;
+    z-index: 0;
+    margin-left: 10px;
+}
+.cuadrado{
+    background-color: #ffffff;
+    width: 170px;
+    height: 45px;
+    border-radius: 18px;
+    margin-top: -75px;
+    margin-left: 80px;
+    z-index: 0;
+}
+.cuadradoDer{
+    background-color: #ffffff;
+    width: 600px;
+    height: 70px;
+    border-radius: 17px 0px 0px 17px;
+    margin-top: -55px;
+    margin-left: 743px;
+    z-index: 0;
+}
+.espacio{
+  margin: 40px;
+}
+.linea {
+    background-color: black;
+    height: 3px;
+    margin-top: -25px;
+    margin-right: 70%;
+    margin-bottom: 20px;
+}
+.imgCarru{
+    width: 1200px;
+}
+.img03{
+    display: flex;
+    justify-content: center;
+}
+.imgForo{
+    margin-right: 25px;
+    width: 300px;
+    height: 180px;
+    border-radius: 20px;
+}
+/*-----------------------------------------------------------------*/
+
+
+.imagenesCampo{
+    width: 120px;
+    height: 120px;
+    margin-left: 10px;
+    margin-bottom: 50px;
+    position: relative;
+    top: 25px;
+    bottom: 15px;
+    left: 10px;
+}
+
+
+
+
+.externo1{
+    background-color: rgb(158, 158, 158);
+    width: 1243px;;
+    height: 170px;
+    margin-left: 100px;
+    border-radius: 20px 0px 0px 20px;
+    margin-bottom: 5px;
+
+}
+.externo2{
+    background-color: rgb(122, 117, 117);
+    width: 1243px;
+    height: 170px;
+    margin-left: 100px;
+    border-radius: 20px 0px 0px 20px;
+    margin-bottom: 5px;
+
+}
+.externo3{
+    background-color: rgb(83, 82, 82);
+    width: 1243px;
+    height: 170px;
+    margin-left: 100px;
+    border-radius: 20px 0px 0px 20px;
+    margin-bottom: 5px;
+
+}
+.interno{
+    
+    width: 1120px;
+    height: 100px;
+    margin-left: 30px;
+    margin-right: 0px;
+    
+    
+}
+
+.texto{
+    background-color: rgb(255, 255, 255);
+    margin-top: -153px;
+    height: 128px;
+    border-radius: 20px;
+}
+#titulo{
+    
+    color: rgb(50, 50, 50);
+    margin-left: 180px;
+    font-family: Lato,sans-serif;
+    font-size: 20pt;
+    font-weight: 200;
+    position: relative;
+    top: 15px;
+}
+#cuerpo{
+    color: rgb(50, 50, 50);
+    text-align: justify;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-right: 20px;
+    margin-left: 180px;
+    margin-top: 30px;
+    padding-left: 5px;
+}
+
+/*-----------------------------------------------------------------*/
+.circulo2{
+  background-color: #ffffff;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  margin-top: -259px;
+  position: relative;
+  z-index: 0;
+  margin-left: 119px;
+}
+/*-----------------------------------------------------------------*/
+.pie-pagina {
+    width: 100%;
+    background-color: rgb(112, 218, 74);
+    margin-top: 40px;
+  }
+  .pie-pagina .grupo-1 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    padding: 45px 0px;
+  }
+  .pie-pagina .grupo-1 .box figure {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .pie-pagina .grupo-1 .box figure img {
+    width: 150px;
+    border-radius: 48%;
+    margin-left: -100px;
+    position: relative;
+    z-index: 1;
+  }
+  .pie-pagina .grupo-1 .box h2 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 20px;
+  }
+  .pie-pagina .grupo-1 .box li {
+    list-style-type: none;
+    margin: 20px;
+  }
+  
+  .pie-pagina .grupo-1 .box li a {
+    color: #fff;
+  }
+  .pie-pagina .grupo-1 .red-social a {
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: #fff;
+    margin-right: 10px;
+    background-color: rgb(44, 44, 43);
+    text-align: center;
+    transition: all 300ms ease;
+    border-radius: 50%;
+  }
+  .pie-pagina .grupo-1 .red-social a:hover {
+    color: aqua;
+  }
+  .pie-pagina .grupo-2 {
+    background-color: rgb(61, 131, 110);
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+  }
+  .pie-pagina .grupo-2 small {
+    font-size: 15px;
+  }
+  @media screen and (max-width: 800px) {
+    .pie-pagina .grupo-1 {
+      width: 90%;
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 30px;
+      padding: 35px 0px;
+    }
+  }
+  /*--------------------------------------------------------------*/
+
+  .slider{
+    width: 95%;
+    margin: auto;
+    overflow: hidden;
+  }
+  .slider ul {
+    display: flex;
+    padding: 0;
+    width: 400%;
+
+    animation: cambio 20s infinite alternate;
+  }
+  .slider li{
+    list-style: none;
+    width: 100%;
+  }
+  .slider img{
+    width: 100%;
+  }
+  @keyframes cambio{
+    0%{margin-left: 0;}
+    20%{margin-left: 0;}
+
+    25%{margin-left: -100%;}
+    45%{margin-left: -100%;}
+
+    50%{margin-left: -200%;}
+    70%{margin-left: -200%;}
+
+    75%{margin-left: -300%;}
+    100%{margin-left: -300%;}
+
+
+  }
+  /*------------------------------------------------------------------------*/
