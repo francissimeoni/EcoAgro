@@ -33,8 +33,7 @@ public class ControladorPrincipal {
 
         if (uS.usuarioLogin(user, password) == true) {
             return "bienvendios.html";
-       
-        } else {
+               } else {
             return null;
 
         }
@@ -73,10 +72,10 @@ public class ControladorPrincipal {
 
         Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
 
-       /* if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
+        if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
             return "redirect:/admin/dashboard";
         }
-*/
+
         return "index.html";
 
     }
@@ -84,7 +83,7 @@ public class ControladorPrincipal {
     @GetMapping("/login")
     public String PaginaLogin(){
     
-        return "login.html";
+        return "iniciarsesion.html";
     }
     
     
