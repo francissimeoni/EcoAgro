@@ -26,20 +26,7 @@ public class ControladorPrincipal {
     @Autowired
     ZonasServicios zS;
 
-    @PostMapping("/Loguearse")
-    public String LogearUsuario(@RequestParam String user, @RequestParam String password) throws Excepciones {
-
-        System.out.println(user + " " + password);
-
-        if (uS.usuarioLogin(user, password) == true) {
-            return "bienvendios.html";
-       
-        } else {
-            return null;
-
-        }
-
-    }
+   
 
     @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
     @GetMapping("/CrearZona")
@@ -60,32 +47,37 @@ public class ControladorPrincipal {
     }
 
     @GetMapping("/CrearUsuario")
-    public void CrearUsuario(@RequestParam String usr, @RequestParam String pass, @RequestParam String email, @RequestParam String telefono) throws Excepciones {
+    public String CrearUsuario() {
+
+        return "frmNuevoUsuario.html";
+    }
+
+    @PostMapping("/PersistirUsuario")
+    public String persistirUser(@RequestParam String usr, @RequestParam String pass, @RequestParam String email, @RequestParam String telefono) throws Excepciones {
 
         System.out.println("usr");
         uS.CrearUsuario(usr, pass, Rol.ADMINISTRADOR, zS.ObtenerDatosDeZonaPorId("1"), null, email, telefono, true);
 
-        // return "index.html";
+        return "index.html";
     }
 
     @GetMapping("/PaginaPrincipal")
-    public String PaginaPrincipal(HttpSession session) {
+    public String PaginaPrincipal() {
+        // HttpSession session 
+        /* Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
 
-        Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
-
-       /* if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
+        if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
             return "redirect:/admin/dashboard";
         }
-*/
+         */
         return "index.html";
 
     }
 
     @GetMapping("/login")
-    public String PaginaLogin(){
-    
-        return "login.html";
+    public String PaginaLogin() {
+
+        return "iniciarsesion.html";
     }
-    
-    
+
 }

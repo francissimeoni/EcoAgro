@@ -20,8 +20,7 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
     
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder administreadorDeAutenticaciones) throws Exception {
-        
-        administreadorDeAutenticaciones
+                administreadorDeAutenticaciones
                 .userDetailsService(usuarioServicios)
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
@@ -38,8 +37,8 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/loguearse")
-                .usernameParameter("user")
-                .passwordParameter("pasword")
+                .usernameParameter("usr")
+                .passwordParameter("pass")
                 .defaultSuccessUrl("/PaginaPrincipal")
                 .permitAll()
                 

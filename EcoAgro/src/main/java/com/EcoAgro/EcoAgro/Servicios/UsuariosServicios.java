@@ -36,6 +36,7 @@ public class UsuariosServicios implements UserDetailsService {
             String telefono, boolean ActivoSiNo) throws Excepciones {
         Usuarios ObjUsuarios = new Usuarios();
 
+        
         validaciones(Usuario, Contraseña, correo, telefono);
         //SeguridadDeClave(Contraseña);
 
@@ -123,9 +124,6 @@ public class UsuariosServicios implements UserDetailsService {
 
     /////// ----> funciones de user detail service
     /////// ----> login
-    
-    
-    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -143,6 +141,8 @@ public class UsuariosServicios implements UserDetailsService {
             HttpSession session = attr.getRequest().getSession(true);
 
             session.setAttribute("SesionDeUsuario", usuario);
+            
+         
 
             User user = new User(usuario.getUsuario(), usuario.getContraseña(), permisos);
             return user;
@@ -152,10 +152,6 @@ public class UsuariosServicios implements UserDetailsService {
 
     }
 
-    
-    
-    
-    
     public Boolean usuarioLogin(String parametroUsr, String contraseña) throws Excepciones {
 
         validaciones(parametroUsr, contraseña, "+", "+");
@@ -175,7 +171,7 @@ public class UsuariosServicios implements UserDetailsService {
 
                 return true;
             } else {
-                  System.out.println("Usuario no logueado");
+                System.out.println("Usuario no logueado");
                 return false;
 
             }
