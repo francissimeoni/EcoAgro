@@ -49,6 +49,8 @@ nav a{
     border-radius: 5px;
     padding: 12px;
 }
+
+
 nav a:hover{
     color: rgb(151, 255, 92);
     border-style:solid;
