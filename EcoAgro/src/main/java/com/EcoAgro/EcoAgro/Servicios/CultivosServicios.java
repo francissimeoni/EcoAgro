@@ -27,9 +27,14 @@ public class CultivosServicios {
 
     @Transactional
     public void crearCultivo(String idCultivos, String nombre, String idCategorias, String idImagenes,
-            Date fechaSiembra, Date fechaCosecha, float densidadPlantacion, float requerimientosHidricos,
-            float temperaturaCrecimiento, float temperaturaMinima, float temperaturaOptima,
+            Date fechaSiembra, Date fechaCosecha, Integer densidadPlantacion, Integer requerimientosHidricos,
+            Integer temperaturaCrecimiento, Integer temperaturaMinima, Integer temperaturaOptima,
             boolean siembraDirectaSiNo, Integer meGusta) throws Excepciones {
+
+        validar(idCultivos, nombre, idCategorias, idImagenes,
+                fechaSiembra, fechaCosecha, densidadPlantacion, requerimientosHidricos,
+                temperaturaCrecimiento, temperaturaMinima, temperaturaOptima,
+                siembraDirectaSiNo, meGusta);
 
         Cultivos cultivo = new Cultivos();
         Categorias categoria = new Categorias();
@@ -64,9 +69,14 @@ public class CultivosServicios {
 
     @Transactional
     public void modificarCultivo(String idCultivos, String nombre, String idCategorias, String idImagenes,
-            Date fechaSiembra, Date fechaCosecha, float densidadPlantacion, float requerimientosHidricos,
-            float temperaturaCrecimiento, float temperaturaMinima, float temperaturaOptima,
+            Date fechaSiembra, Date fechaCosecha, Integer densidadPlantacion, Integer requerimientosHidricos,
+            Integer temperaturaCrecimiento, Integer temperaturaMinima, Integer temperaturaOptima,
             boolean siembraDirectaSiNo, Integer meGusta) throws Excepciones {
+
+        validar(idCultivos, nombre, idCategorias, idImagenes,
+                fechaSiembra, fechaCosecha, densidadPlantacion, requerimientosHidricos,
+                temperaturaCrecimiento, temperaturaMinima, temperaturaOptima,
+                siembraDirectaSiNo, meGusta);
 
         Cultivos cultivo = new Cultivos();
         Categorias categoria = new Categorias();
@@ -112,5 +122,60 @@ public class CultivosServicios {
         }
 
         cultivosRepositorio.delete(cultivo);
+    }
+
+    private void validar(String idCultivos, String nombre, String idCategorias, String idImagenes,
+            Date fechaSiembra, Date fechaCosecha, Integer densidadPlantacion, Integer requerimientosHidricos,
+            Integer temperaturaCrecimiento, Integer temperaturaMinima, Integer temperaturaOptima,
+            boolean siembraDirectaSiNo, Integer meGusta) throws Excepciones {
+
+        if (idCultivos.isEmpty() || idCultivos == null) {
+            throw new Excepciones("la idCultivos no puede ser nula");
+        }
+
+        if (nombre.isEmpty() || nombre == null) {
+            throw new Excepciones("el nombre no puede ser nulo");
+        }
+
+        if (idCategorias.isEmpty() || idCategorias == null) {
+            throw new Excepciones("la idCategorias no puede ser nula");
+        }
+
+        if (idImagenes.isEmpty() || idImagenes == null) {
+            throw new Excepciones("la idImagenes no puede ser nula");
+        }
+
+        if (fechaSiembra == null) {
+            throw new Excepciones("fechaSiembra no puede ser nulo");
+        }
+
+        if (fechaCosecha == null) {
+            throw new Excepciones("fechaCosecha no puede ser nulo");
+        }
+
+        if (densidadPlantacion == null) {
+            throw new Excepciones("densidadPlantacion no puede ser nulo");
+        }
+
+        if (temperaturaCrecimiento == null) {
+            throw new Excepciones("temperaturaCrecimiento no puede ser nulo");
+        }
+
+        if (requerimientosHidricos == null) {
+            throw new Excepciones("requerimientosHidricos no puede ser nulo");
+        }
+
+        if (temperaturaMinima == null) {
+            throw new Excepciones("temperaturaMinima no puede ser nulo");
+        }
+
+        if (temperaturaOptima == null) {
+            throw new Excepciones("temperaturaOptima no puede ser nulo");
+        }
+
+        if (meGusta == null) {
+            throw new Excepciones("meGusta no puede ser nulo");
+        }
+
     }
 }

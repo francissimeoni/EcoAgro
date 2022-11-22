@@ -39,12 +39,12 @@ public class Cultivos {
     @JoinColumn(name = "idCategorias", insertable = true, updatable = true)
     private Categorias Categorias;
 
-    private Float densidadPlantacion;
-    private Float requerimientosHidricos;
-    private Float temperaturaCrecimiento;
+    private Integer densidadPlantacion;
+    private Integer requerimientosHidricos;
+    private Integer temperaturaCrecimiento;
     private Boolean siembraDirectaSiNo;
-    private Float temperaturaMinima;
-    private Float temperaturaOptima;
+    private Integer temperaturaMinima;
+    private Integer temperaturaOptima;
     private Integer MeGusta;
 
    
