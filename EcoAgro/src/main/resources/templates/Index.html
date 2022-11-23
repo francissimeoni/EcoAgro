@@ -24,8 +24,8 @@
             <img src="img/Logo.png" alt="error" class="logo-img">
             <h2 class="logo-nombre">ECOAGRO</h2>
         </div>
-        <nav >
-            <a href ="/login" class="nav-link" th:if="${session.sessionDeUsuario != null}" tx:text="Iniciar sesion"></a>
+        <nav style="display: inline">
+            <a href ="/login">Iniciar sesion</a>
             <a href="cultivos.html" class="nav-link">Categorias</a>
             <a href="" class="nav-link">Nuestras redes</a>
             <a href="Foro.html" class="nav-link">Foro</a>
@@ -68,9 +68,7 @@
 <!--Noticias-->
 
 
-    
-    <h1 th:if="${session.SesionDeUsuario != null}" th:text="'Bienvenido ' + ${session.SesionDeUsuario.getUsuario}" </h1>
-    
+  
 </div>
 <div class="ultimas-noticias">
     <h1 style="margin-left: 160px;margin-bottom: 21px">Ultimas noticias</h1>
