@@ -31,7 +31,7 @@ public class ControladorPrincipal {
     @GetMapping("/")
     public String PaginaPrincipal(ModelMap modelo) {
 
-        modelo.put("usuarios",uS.DevolverListaDeUsuariosCompleta());
+        modelo.put("usuarios", uS.DevolverListaDeUsuariosCompleta());
         return "Index.html";
 
     }
@@ -54,7 +54,6 @@ public class ControladorPrincipal {
          */
     }
 
-
     @PostMapping("/PersistirUsuario")
     public String persistirUser(@RequestParam String usr, @RequestParam String pass, @RequestParam String email, @RequestParam String telefono, ModelMap modelo) throws Excepciones {
 
@@ -63,7 +62,7 @@ public class ControladorPrincipal {
             uS.CrearUsuario(usr, pass, Rol.ADMINISTRADOR, zS.ObtenerDatosDeZonaPorId("1"), null, email, telefono, true);
             modelo.put("exito", "Usuario cargado con exito");
             return "UsuarioCargadoConExito.html";
-           
+
         } catch (Exception e) {
             modelo.put("error", "Hubo algun error en la carga del usuario");
             return "UsuarioCargadoConExito.html";
@@ -72,7 +71,7 @@ public class ControladorPrincipal {
     }
 
     @GetMapping("/RedirectMain")
-         public String redireccionandoUsuario() throws InterruptedException {
+    public String redireccionandoUsuario() throws InterruptedException {
 
         Thread.sleep(2 * 1000);
         return "index.html";

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/Cultivos")
 public class ControladorCultivo {
 
-        @GetMapping("/PaginaPrincipal")
+    @GetMapping("/PaginaPrincipal")
     public String PaginaPrincipalCultivos() {
 
         return "cultivos.html";
