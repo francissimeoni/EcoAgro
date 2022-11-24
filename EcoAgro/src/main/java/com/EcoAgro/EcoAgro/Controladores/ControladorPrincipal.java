@@ -29,9 +29,10 @@ public class ControladorPrincipal {
     ZonasServicios zS;
 
     @GetMapping("/")
-    public String PaginaPrincipal() {
+    public String PaginaPrincipal(ModelMap modelo) {
 
-        return "index.html";
+        modelo.put("usuarios",uS.DevolverListaDeUsuariosCompleta());
+        return "Index.html";
 
     }
 
@@ -53,11 +54,6 @@ public class ControladorPrincipal {
          */
     }
 
-    @GetMapping("/CrearUsuario")
-    public String CrearUsuario() {
-
-        return "frmNuevoUsuario.html";
-    }
 
     @PostMapping("/PersistirUsuario")
     public String persistirUser(@RequestParam String usr, @RequestParam String pass, @RequestParam String email, @RequestParam String telefono, ModelMap modelo) throws Excepciones {
