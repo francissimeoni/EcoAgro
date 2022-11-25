@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+
+<html html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+
+<head>
+    <title>Crear Cultivo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+
+    <h1>Crear cultivo</h1><br><br>
+
+    <form action="Cultivo/PersistirCultivo" method="post">
+
+        <input type="text" id="nombre" placeholder="Nombre de cultivo"><br><br>
+        <label for="siembra">fecha de siembra</label><br>
+        <input type="date" name="" id="siembra"><br>
+        <label for="cosecha">fecha de siembra</label><br>
+        <input type="date" name="" id="cosecha"><br><br>
+        <input type="text" id="dp" placeholder="Densidad de plantacion, ejemplo: 90 "> <span>kg/ha</span><br><br>
+        <input type="text" id="rh" placeholder="Requerimientos hidricos"> <span>Kc x ETo</span><br><br>
+        <input type="text" id="tc" placeholder="Temperatura de crecimiento"> <span>°C</span><br><br>
+
+        <label for="sd"></label> ¿Es siembra directa?<br>
+        <input type="radio" name="sd" id="si"> <span> SI </span><BR>
+        <input type="radio" name="sd" id="no"> <span> NO </span><br><br>
+
+        <input type="text" id="tm" placeholder="Temperatura minima"> <span>°C</span><br><br>
+        <input type="text" id="toc" placeholder="Temperatura optima de crecimiento"> <span>°C</span><br><br>
+        <input type="file" name="imagen" id="imagen"><br><br><br>
+
+        <input type="submit" value="Guardar">
+
+        <br><br>
+    </form>
+
+
+
+</body>
+
+</html>
