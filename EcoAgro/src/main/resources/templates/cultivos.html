@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Cultivos</title>
         <link rel="stylesheet" href="/css/gridCultivos.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,130 +13,155 @@
 
     <body>
 
- <header th:replace="/fragments/header::header"></header> 
-   
-    <head>
-    <div class="circulo"></div>
-    <div class="cuadrado"></div>
-    <div class="cuadradoDer"></div>
-    <div class="espacio"></div>
-</head>   
-<!------------------------------------------------->
-<div>
-    <h2>Cultivos</h2>
-    <h3>FRUTAS Y VERDURAS</h3>
-    <hr class="lineaCentral">
-    <div class="contenedor_galeria">
+        <header th:replace="/fragments/header::header"></header> 
 
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/1.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Sandia</h4>
+
+        <!------------------------------------------------->
+        <div>
+            <h2>Cultivos</h2>
+            <h3>FRUTAS Y VERDURAS</h3>
+            <hr class="lineaCentral">
+            <div class="contenedor_galeria">
+
+                <div class="capa" onclick="href='/Cultivos/verCultivo'">
+                    <a href="/Cultivos/VerCultivo">  
+                        <img class= "img_cultivo" src="/img/1.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Sandia</h4>
+                        </div>
+                    </a>
+                </div>  
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/2.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Papas</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/3.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Choclo</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa" >
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/4.jpg" alt=""  >
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Zanahorias</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/5.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Cebolla</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/6.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Tomate</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/7.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Lechuga</h4>
+                        </div>
+                    </a>
+                </div>  
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/8.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Zapallitos</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/9.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Manzanas</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/10.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Ciruelas</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/11.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Naranjas</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/12.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Duraznos</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/13.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Batatas</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/14.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Acelga</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="capa">
+                    <a href="/Cultivos/VerCultivo">
+                        <img class= "img_cultivo" src="/img/15.jpg" alt="">
+                        <div class="item">
+                            <h4 class="nombre_cultivo">Mandarinas</h4>
+                        </div>
+                    </a>
+                </div>
+
+
             </div>
-        </div>  
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/2.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Papas</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/3.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Choclo</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/4.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Zanahorias</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/5.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Cebolla</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/6.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Tomate</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/7.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Lechuga</h4>
-            </div>
-        </div>  
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/8.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Zapallitos</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/9.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Manzanas</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/10.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Ciruelas</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/11.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Naranjas</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/12.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Duraznos</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/13.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Batatas</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/14.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Acelga</h4>
-            </div>
-        </div>
-
-        <div class="capa">
-            <img class= "img_cultivo" src="/img/15.jpg" alt="">
-            <div class="item">
-                <h4 class="nombre_cultivo">Mandarinas</h4>
-            </div>
-        </div>
 
 
-    </div>
-
-
-</div>      
-</body>
+        </div>      
+    </body>
 </html>
