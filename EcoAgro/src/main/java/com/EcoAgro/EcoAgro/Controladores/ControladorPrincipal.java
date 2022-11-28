@@ -28,12 +28,28 @@ public class ControladorPrincipal {
     @Autowired
     ZonasServicios zS;
 
-    @GetMapping("/")
-    public String PaginaPrincipal(ModelMap modelo) {
+    //@PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
+    @GetMapping("/PaginaPrincipal")
+    public String PaginaPrincipal(ModelMap modelo, HttpSession session) {
 
-        modelo.put("usuarios", uS.DevolverListaDeUsuariosCompleta());
-        return "Index.html";
+        Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
 
+        if (logueado != null) {
+
+            if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
+                modelo.put("sesion", "admin");
+                return "redirect:/productor/PaginaPrincipal";
+
+            } else {
+                System.out.println(logueado.getRol().toString());
+                return "index.html";
+            }
+
+        } else {
+
+            System.out.println("no hay httpSession y no ingresé a la comparacion, soy guest");
+            return "index.html";
+        }
     }
 
     @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
@@ -55,7 +71,10 @@ public class ControladorPrincipal {
     }
 
     @PostMapping("/PersistirUsuario")
-    public String persistirUser(@RequestParam String usr, @RequestParam String pass, @RequestParam String email, @RequestParam String telefono, ModelMap modelo) throws Excepciones {
+    public String persistirUser(@RequestParam String usr,
+            @RequestParam String pass,
+            @RequestParam String email,
+            @RequestParam String telefono, ModelMap modelo) throws Excepciones {
 
         try {
             System.out.println("usr");
@@ -78,6 +97,7 @@ public class ControladorPrincipal {
 
     }
 
+    /*
     @GetMapping("/PaginaPrincipal")
     public String PaginaPrincipal(HttpSession session, ModelMap modelo) {
 
@@ -89,7 +109,7 @@ public class ControladorPrincipal {
         return "index.html";
 
     }
-
+     */
     @GetMapping("/login")
     public String PaginaLogin() {
 

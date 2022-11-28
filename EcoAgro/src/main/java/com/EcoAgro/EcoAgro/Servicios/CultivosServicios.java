@@ -39,15 +39,18 @@ public class CultivosServicios {
         if (opCategorias.isPresent()) {
             categoria = opCategorias.get();
         }
+        
+        /*
         Optional<Imagenes> opImagenes = imagenesRepositorio.findById(idImagenes);
         if (opImagenes.isPresent()) {
             imagen = opImagenes.get();
         }
+        */
 
         cultivo.setIdcultivo(idCultivos);
         cultivo.setNombre(nombre);
         cultivo.setCategorias(categoria);
-        cultivo.setImagenes(imagen);
+        //cultivo.setImagenes(imagen);
         cultivo.setFechaSiembra(fechaSiembra);
         cultivo.setFechaCosecha(fechaCosecha);
         cultivo.setDensidadPlantacion(densidadPlantacion);
