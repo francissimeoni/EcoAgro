@@ -12,10 +12,7 @@ public class ControladorAdministrador {
     
     @GetMapping("/dashboard")
     public void dashboard(){
-    
-    
         
-    
     }
     
     

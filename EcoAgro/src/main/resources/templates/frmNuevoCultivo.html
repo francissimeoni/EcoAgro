@@ -5,42 +5,97 @@
 
 
 <head>
-    <title>Crear Cultivo</title>
+    <title>TODO supply a title</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/nuevoCultivoStyle.css">
 </head>
 
 <body>
 
+    <div class="contenedor">
+        <h1>Crear cultivo</h1><br><br>
+        <div class="caja">
+            
+            <form action="Cultivo/PersistirCultivo" method="post">
+                <div class="row">
+                    <div class="column">
+                        <div class="imputGroup">
+                            <input type="text" id="" class="item"placeholder="Nombre de cultivo">
+                              
+                        </div>
+                        <div class="imputGroup">
+                            <label for="siembra">Fecha de siembra</label>
+                            
+                            <input type="date" name="fecha" id="siembra" class="item">
+                            
+                            <!--<label for="cosecha">Fecha de siembra</label>
+                            <br>
+                            <input type="date" name="fecha" id="cosecha" class="item"><br>
+                            <br>-->
+                        </div>
+                        <div class="imputGroup">
+                            <input type="text" id="dp" placeholder="Densidad de plantacion, ejemplo: 90 "> <span>Kg/ha</span><br>
+                            
+                        </div>
+                        <div class="imputGroup">
+                        <input type="text" id="rh" class="item" placeholder="Requerimientos hidricos"><span>Kc x ETo</span>
+                        
+                        </div>
+                        <div class="imputGroup">
+                        <input type="text" id="tc" class="item" placeholder="Temperatura de crecimiento"> <span>°C</span><br>
+                        
+                        </div>
 
-    <h1>Crear cultivo</h1><br><br>
+                        <div class="imputGroup">
+                            <fieldset class="card">
+                                <legend>¿Es siembra directa?</legend>
+                                <label for="sd"></label>
+                                <label for="si">SI</label>
+                                <input type="radio" name="si" id="sd" class="option"> <!--<span> SI </span>---->
+                                <label for="no">NO</label>
+                                <input type="radio" name="no" id="sd" class="option"> <!--<span> NO </span><br>---->
+                            </fieldset>                        
+                        </div>
+                    </div>
+                        
+                    <div class="column">
+                        <div class="imputGroup">
+                            <label for="cosecha">Fecha de siembra</label>
+                            
+                            <input type="date" name="fecha" id="cosecha" class="item">
+                            
+                        </div>
+                        <div class="imputGroup">
+                            <input type="text" id="tm" class="item" placeholder="Temperatura minima"> <span>°C</span>
+                            
+                        </div>
+                        <div class="imputGroup">
+                            <input type="text" id="toc" class="item" placeholder="Temperatura optima de crecimiento"> <span>°C</span><br>
+                               
+                        </div>
+                        <div class="imputGroup">
+                            <select name="opciones" id="">
+                                <option value="opcion1">opcion1</option>
+                                <option value="opcion2">opcion2</option>
+                                <option value="opcion3">opcion3</option>
+                            </select>
+                        </div>
+                        <div class="imputGroup">
+                            <input type="file" name="imagen" class="item" id="imagen">
+                                
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <input type="submit" value="Guardar" class="boton">
+                    </div>
+                
+            </form>
+        </div>
 
-    <form action="Cultivo/PersistirCultivo" method="post">
-
-        <input type="text" id="nombre" placeholder="Nombre de cultivo"><br><br>
-        <label for="siembra">fecha de siembra</label><br>
-        <input type="date" name="" id="siembra"><br>
-        <label for="cosecha">fecha de siembra</label><br>
-        <input type="date" name="" id="cosecha"><br><br>
-        <input type="text" id="dp" placeholder="Densidad de plantacion, ejemplo: 90 "> <span>kg/ha</span><br><br>
-        <input type="text" id="rh" placeholder="Requerimientos hidricos"> <span>Kc x ETo</span><br><br>
-        <input type="text" id="tc" placeholder="Temperatura de crecimiento"> <span>°C</span><br><br>
-
-        <label for="sd"></label> ¿Es siembra directa?<br>
-        <input type="radio" name="sd" id="si"> <span> SI </span><BR>
-        <input type="radio" name="sd" id="no"> <span> NO </span><br><br>
-
-        <input type="text" id="tm" placeholder="Temperatura minima"> <span>°C</span><br><br>
-        <input type="text" id="toc" placeholder="Temperatura optima de crecimiento"> <span>°C</span><br><br>
-        <input type="file" name="imagen" id="imagen"><br><br><br>
-
-        <input type="submit" value="Guardar">
-
-        <br><br>
-    </form>
-
-
-
+    </div>
 </body>
 
 </html>
