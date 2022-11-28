@@ -2,11 +2,11 @@ package com.EcoAgro.EcoAgro.Servicios;
 
 import com.EcoAgro.EcoAgro.Entidades.Categorias;
 import com.EcoAgro.EcoAgro.Entidades.Cultivos;
-import com.EcoAgro.EcoAgro.Entidades.Imagenes;
+import com.EcoAgro.EcoAgro.Entidades.Imagen;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import com.EcoAgro.EcoAgro.Repositorios.CategoriaRepositorio;
 import com.EcoAgro.EcoAgro.Repositorios.CultivosRepositorio;
-import com.EcoAgro.EcoAgro.Repositorios.ImagenesRepositorio;
+import com.EcoAgro.EcoAgro.Repositorios.ImagenRepositorio;
 import java.util.Date;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class CultivosServicios {
     private CategoriaRepositorio categoriaRepositorio;
 
     @Autowired
-    private ImagenesRepositorio imagenesRepositorio;
+    private ImagenRepositorio imagenesRepositorio;
 
     @Transactional
     public void crearCultivo(String idCultivos, String nombre, String idCategorias, String idImagenes,
@@ -33,7 +33,7 @@ public class CultivosServicios {
 
         Cultivos cultivo = new Cultivos();
         Categorias categoria = new Categorias();
-        Imagenes imagen = new Imagenes();
+        Imagen imagen = new Imagen();
 
         Optional<Categorias> opCategorias = categoriaRepositorio.findById(idCategorias);
         if (opCategorias.isPresent()) {
@@ -73,13 +73,13 @@ public class CultivosServicios {
 
         Cultivos cultivo = new Cultivos();
         Categorias categoria = new Categorias();
-        Imagenes imagen = new Imagenes();
+        Imagen imagen = new Imagen();
 
         Optional<Categorias> opCategorias = categoriaRepositorio.findById(idCategorias);
         if (opCategorias.isPresent()) {
             categoria = opCategorias.get();
         }
-        Optional<Imagenes> opImagenes = imagenesRepositorio.findById(idImagenes);
+        Optional<Imagen> opImagenes = imagenesRepositorio.findById(idImagenes);
         if (opImagenes.isPresent()) {
             imagen = opImagenes.get();
         }
@@ -90,7 +90,7 @@ public class CultivosServicios {
         }
         cultivo.setNombre(nombre);
         cultivo.setCategorias(categoria);
-        cultivo.setImagenes(imagen);
+        cultivo.setImagen(imagen);
         cultivo.setFechaSiembra(fechaSiembra);
         cultivo.setFechaCosecha(fechaCosecha);
         cultivo.setDensidadPlantacion(densidadPlantacion);
