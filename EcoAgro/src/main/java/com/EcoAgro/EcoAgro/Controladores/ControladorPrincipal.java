@@ -88,6 +88,25 @@ public class ControladorPrincipal {
 
     }
 
+    @GetMapping("/Contacto")
+    public String Contacto(ModelMap modelo) {
+
+        return "contacto.html";
+    }
+    
+    @GetMapping("/QuienesSomos")
+    public String QuienesSomos(ModelMap modelo) {
+
+        return "quienesSomos.html";
+    }
+    
+    
+    @GetMapping("/PreguntasFrecuentes")
+    public String PreguntasFrecuentes(ModelMap modelo) {
+
+        return "preguntasFrecuentes.html";
+    }
+
     @GetMapping("/RedirectMain")
     public String redireccionandoUsuario() throws InterruptedException {
 
@@ -112,16 +131,14 @@ public class ControladorPrincipal {
     @GetMapping("/login")
     public String PaginaLogin(ModelMap modelo) {
 
-    
-   
-            return "iniciarsesion.html";
-        
+        return "iniciarsesion.html";
+
     }
-    
+
     @GetMapping("/failLoad")
-    public String failLoad(ModelMap modelo){
-          modelo.put("error", "Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
-                return "iniciarsesion.html";
+    public String failLoad(ModelMap modelo) {
+        modelo.put("error", "Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
+        return "iniciarsesion.html";
     }
 
 }

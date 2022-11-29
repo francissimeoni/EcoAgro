@@ -1,5 +1,19 @@
 
 
+
+
+function hacerFoco() {
+
+	document.getElementById('red-social').focus();
+	alert('hasta aca llegue');
+}
+
+
+
+
+
+
+
 const form = document.getElementById('form');
 const inputs = document.querySelectorAll('#form input');
 
@@ -8,7 +22,7 @@ const expressions = {
 	author: /^[a-zA-ZÀ-ÿ\s]{1,20}$/, // Letras y espacios, pueden llevar acentos.
 	editorial: /^[a-zA-ZÀ-ÿ\s]{1,20}$/, // Letras y espacios, pueden llevar acentos.
 	isbn: /^[0-9]{12}/ // doce números.
-	}
+}
 
 
 
@@ -18,7 +32,7 @@ const input = {
 	author: "",
 	editorial: "",
 	isbn: ""
-	
+
 }
 
 
@@ -35,7 +49,7 @@ const checkForms = (e) => {
 				//document.querySelector(`#group-name p`).classList.remove('errorUser'); //Texto para que aparezca el fallo (aun no implementado)
 				document.querySelector(`#group-title i`).classList.add('fa-check-circle');
 				input.title = true;
-				
+
 
 
 			} else {
@@ -56,7 +70,7 @@ const checkForms = (e) => {
 				document.querySelector(`#group-author i`).classList.remove('fa-circle-xmark');
 				document.querySelector(`#group-author i`).classList.add('fa-check-circle');
 				input.author = true;
-				
+
 
 			} else {
 				document.getElementById('group-author').classList.remove('formCorrect');
@@ -101,7 +115,7 @@ const checkForms = (e) => {
 			}
 			checkSaveButton();
 			break;
-		
+
 	}
 
 
@@ -114,17 +128,17 @@ const checkForms = (e) => {
 const checkSaveButtons = () => {
 
 	if (input.title === true && input.author === true && input.editorial === true && input.isbn === true) {
-	
+
 		document.getElementById('button').disabled = false;
-	
+
 	} else {
-	
+
 		document.getElementById('button').disabled = true;
-	
+
 	}
-	
-	
-	}
+
+
+}
 
 
 
@@ -133,7 +147,7 @@ const checkSaveButtons = () => {
 
 inputs.forEach((input) => {
 	input.addEventListener('keyup', checkForm);
-	
+
 });
 const inputss = document.querySelectorAll('#form input');
 
@@ -176,7 +190,7 @@ const checkForm = (e) => {
 				//document.querySelector(`#group-name p`).classList.remove('errorUser'); //Texto para que aparezca el fallo (aun no implementado)
 				document.querySelector(`#group-name i`).classList.add('fa-check-circle');
 				input.name = true;
-				
+
 
 
 			} else {
@@ -197,7 +211,7 @@ const checkForm = (e) => {
 				document.querySelector(`#group-lastname i`).classList.remove('fa-circle-xmark');
 				document.querySelector(`#group-lastname i`).classList.add('fa-check-circle');
 				input.lastname = true;
-				
+
 
 			} else {
 				document.getElementById('group-lastname').classList.remove('formCorrect');
@@ -234,8 +248,8 @@ const checkForm = (e) => {
 				input.zipCode = true;
 
 			} else {
-                
-				
+
+
 				document.getElementById('group-zipCode').classList.add('formIncorrect');
 				document.getElementById('group-zipCode').classList.remove('formCorrect');
 				document.querySelector(`#group-zipCode i`).classList.add('fa-circle-xmark');
@@ -288,7 +302,7 @@ const checkForm = (e) => {
 				document.getElementById('group-rpassword').classList.remove('formIncorrect');
 				document.querySelector(`#group-rpassword i`).classList.remove('fa-circle-xmark');
 				document.querySelector(`#group-rpassword i`).classList.add('fa-check-circle');
-				
+
 
 			} else {
 				document.getElementById('group-rpassword').classList.remove('formCorrect');
@@ -344,7 +358,7 @@ const checkRpassword = () => {
 	const password = document.getElementById('password');
 	const rpassword = document.getElementById('rpassword');
 
-	if (password.value !== rpassword.value || rpassword.value === "" ) {
+	if (password.value !== rpassword.value || rpassword.value === "") {
 		document.getElementById(`group-rpassword`).classList.add('formIncorrect');
 		document.getElementById(`group-rpassword`).classList.remove('formCorrect');
 		document.querySelector(`#group-rpassword i`).classList.add('fa-circle-xmark');
@@ -368,17 +382,17 @@ const checkSaveButton = () => {
 
 	if (input.name === true && input.lastname === true && input.address === true && input.zipCode === true && input.email === true
 		&& input.password === true && input.rpassword === true) {
-	
+
 		document.getElementById('button').disabled = false;
-	
+
 	} else {
-	
+
 		document.getElementById('button').disabled = true;
-	
+
 	}
-	
-	
-	}
+
+
+}
 
 
 
@@ -387,5 +401,5 @@ const checkSaveButton = () => {
 
 inputs.forEach((input) => {
 	input.addEventListener('keyup', checkForm);
-	
+
 });
