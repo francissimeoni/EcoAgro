@@ -1,21 +1,22 @@
 <!-- <header th:replace= "/fragments/header :: header" </header>-->
-<div th:fragment="header">
-        <header>
-            <div class="Logo">
-                <img src="/img/Logo.png" alt="error" class="logo-img">
-                <h2 class="logo-nombre">ECOAGRO</h2>
-            </div>
-           <nav style="display: flex">
-            <a id="nb" href ="/login">Iniciar sesion</a>
+<div th:fragment="headerLogueado">
+    <header>
+        <div class="Logo">
+            <img src="/img/Logo.png" alt="error" class="logo-img">
+            <h2 class="logo-nombre">ECOAGRO</h2>
+        </div>
+
+        <nav style="display: flex">
+            <a id="nb" href ="/productor/dashboard">Mi perfil</a>
             <a id="nb" href="/Cultivos/PaginaPrincipal" class="nav-link">Cultivos</a> 
             <a id="nb" href="/Redes/PaginaPrincipal" class="nav-link">Nuestras redes</a>
             <a id="nb" href="/Foro/ForoPrincipal" class="nav-link">Foro</a>
-            <a id="nb" href="/Contacto/Contacto" class="nav-link">Contacto</a>
+            <a id="nb" href="/logout" class="nav-link">Cerrar sesion</a>
         </nav>
 
 
 
-        </header>
+    </header>
     <head>
     <div class="circulo"></div>
     <div class="cuadrado"></div>

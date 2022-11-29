@@ -24,9 +24,9 @@ header{
 
 }
 h2.logo-nombre{
-    font-size: 25px;
+    text-align: 200px;
     margin-left: -0.9px;
-
+    font-size: 25px;
 }
 .Logo{
     display: flex;
