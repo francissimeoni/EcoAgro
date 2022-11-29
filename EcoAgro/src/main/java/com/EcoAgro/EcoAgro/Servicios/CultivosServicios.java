@@ -1,11 +1,11 @@
 package com.EcoAgro.EcoAgro.Servicios;
-
 import com.EcoAgro.EcoAgro.Entidades.Categorias;
 import com.EcoAgro.EcoAgro.Entidades.Cultivos;
 import com.EcoAgro.EcoAgro.Entidades.Imagen;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import com.EcoAgro.EcoAgro.Repositorios.CategoriaRepositorio;
 import com.EcoAgro.EcoAgro.Repositorios.CultivosRepositorio;
+import java.util.ArrayList;
 import com.EcoAgro.EcoAgro.Repositorios.ImagenRepositorio;
 import java.util.Date;
 import javax.transaction.Transactional;
@@ -40,12 +40,7 @@ public class CultivosServicios {
             categoria = opCategorias.get();
         }
         
-        /*
-        Optional<Imagenes> opImagenes = imagenesRepositorio.findById(idImagenes);
-        if (opImagenes.isPresent()) {
-            imagen = opImagenes.get();
-        }
-        */
+   
 
         cultivo.setIdcultivo(idCultivos);
         cultivo.setNombre(nombre);
@@ -116,4 +111,15 @@ public class CultivosServicios {
 
         cultivosRepositorio.delete(cultivo);
     }
+
+
+public ArrayList<Cultivos> UltimasNoticias(){
+
+    
+    
+    return null;
+    
 }
+
+}
+

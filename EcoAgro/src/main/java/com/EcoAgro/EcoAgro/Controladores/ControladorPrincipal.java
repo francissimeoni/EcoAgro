@@ -38,16 +38,15 @@ public class ControladorPrincipal {
 
             if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
                 modelo.put("sesion", "admin");
-                return "redirect:/productor/PaginaPrincipal";
+                return "index.html";
 
             } else {
-                System.out.println(logueado.getRol().toString());
+
                 return "index.html";
             }
 
         } else {
 
-            System.out.println("no hay httpSession y no ingresé a la comparacion, soy guest");
             return "index.html";
         }
     }
@@ -111,9 +110,18 @@ public class ControladorPrincipal {
     }
      */
     @GetMapping("/login")
-    public String PaginaLogin() {
+    public String PaginaLogin(ModelMap modelo) {
 
-        return "iniciarsesion.html";
+    
+   
+            return "iniciarsesion.html";
+        
+    }
+    
+    @GetMapping("/failLoad")
+    public String failLoad(ModelMap modelo){
+          modelo.put("error", "Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
+                return "iniciarsesion.html";
     }
 
 }

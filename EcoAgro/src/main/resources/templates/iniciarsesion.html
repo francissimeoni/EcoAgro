@@ -1,47 +1,55 @@
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Iniciar Sesión</title>
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-    />
-    <link rel="stylesheet" href="/css/formularios.css" />
-  </head>
-  <body>
-      
-      
-      
-    <form class="formulario" action="/loguearse" method="POST">
-      <h1>Iniciar sesión</h1>
-      <div class="contenedor">
-        <div class="input-contenedor">
-          <i class="fas fa-envelope icon"></i>
-          <input type="text" name="usr" placeholder="Correo Electronico" />
+<html html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Iniciar Sesión</title>
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0"
+            />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+            />
+        <link rel="stylesheet" href="/css/formularios.css" />
+    </head>
+    <body>
+
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align: center;">Inicio de sesión</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
         </div>
 
-        <div class="input-contenedor">
-          <i class="fas fa-key icon"></i>
-          <input type="password" name="pass" placeholder="Contraseña" />
-        </div>
-        <input type="submit" value="Aceptar" class="button" />
-        <p>
-          Al registrarte, aceptas nuestras Condiciones de uso y Política de
-          privacidad.
-        </p>
-        <p>
-          ¿No tienes una cuenta?
-          <a class="link" href="/Usuarios/CrearUsuario">Registrate </a>
-        </p>
-      </div>
-    </form>
-  
-  
-  
-  
-  </body>
+
+        <form class="formulario" action="/loguearse" method="POST">
+            <h1>Iniciar sesión</h1>
+            <div class="contenedor">
+                <div class="input-contenedor">
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="text" name="usr" placeholder="Correo Electronico" />
+                </div>
+
+                <div class="input-contenedor">
+                    <i class="fas fa-key icon"></i>
+                    <input type="password" name="pass" placeholder="Contraseña" />
+                </div>
+                <input type="submit" value="Aceptar" class="button" />
+                <p>
+                    Al registrarte, aceptas nuestras Condiciones de uso y Política de
+                    privacidad.
+                </p>
+                <p>
+                    ¿No tienes una cuenta?
+                    <a class="link" href="/Usuarios/CrearUsuario">Registrate </a>
+                </p>
+            </div>
+        </form>
+
+
+
+
+    </body>
 </html>
