@@ -13,8 +13,14 @@
 <body>
     <!--------------------head------------------------->
 
-     <header th:replace="/fragments/header::header"></header> 
-   
+      <body>
+
+        <div  th:if="${sesion != 'admin'}">
+            <header th:replace="/fragments/header::header"></header>
+        </div>
+        <header sec:authorize="hasAnyRole('ADMINISTRADOR', 'PRODUCTOR')"
+                th:replace="/fragments/HeaderLogueado::headerLogueado"></header>
+    </head>
 
     <!-------------------head--------------------------->
     <div>
