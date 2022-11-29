@@ -1,0 +1,119 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/*font-family: 'Roboto', sans-serif;
+/*font-family: 'Roboto Slab', serif;*/
+/*-------------------------*/
+
+body{
+    margin: 0%;
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+header{
+    background-color: #88d166 ;
+    min-height: 70px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+h2.logo-nombre{
+    text-align: 200px;
+    margin-left: -0.9px;
+}
+.Logo{
+    display: flex;
+    align-items: center;
+    
+}
+.logo-img{
+    height: 80px;
+    margin-right: 12px;
+    z-index: 1;
+    margin-left: 8px;
+    margin: 10px;
+}
+nav a{
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    padding-right: 50px;
+    text-align: center;
+    background-color:rgb(255, 255, 255) ;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+/*-------------------------*/
+.imagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.imagen .item{
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+    align-items: center;
+    justify-content: center;
+}
+.lineadivisora{
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 30px;
+    height: 1px;
+    background-color: rgb(55, 55, 55);
+}
+.texto{
+    margin-left: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+h2{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 3em;
+    margin: 30px;
+}
+.info{
+    font-family: 'Roboto', sans-serif;
+    margin-left: 40px;
+    margin-left: 40px;
+    margin-block-end: 300px;
+}
+.nameInfo{
+    margin: 10px;
+}
+.boton{
+    display: flex;
+    justify-content: center;
+    margin-top: -290px;
+
+}
+#modificarBoton{
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    height: 50px;
+    width: 400px;
+    justify-content: center;
+    border-color: white;
+    color: white;
+    background-color: #6eae50;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+#modificarBoton:hover{
+    background-color: transparent;
+    border: 2px solid #6eae50;
+    color: #6eae50;
+}
+

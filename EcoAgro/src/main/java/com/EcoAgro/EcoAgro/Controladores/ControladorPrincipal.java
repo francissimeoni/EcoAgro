@@ -28,11 +28,28 @@ public class ControladorPrincipal {
     @Autowired
     ZonasServicios zS;
 
-    @GetMapping("/")
-    public String PaginaPrincipal() {
+    //@PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
+    @GetMapping("/PaginaPrincipal")
+    public String PaginaPrincipal(ModelMap modelo, HttpSession session) {
 
-        return "index.html";
+        Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
 
+        if (logueado != null) {
+
+            if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
+                modelo.put("sesion", "admin");
+                return "redirect:/productor/PaginaPrincipal";
+
+            } else {
+                System.out.println(logueado.getRol().toString());
+                return "index.html";
+            }
+
+        } else {
+
+            System.out.println("no hay httpSession y no ingresé a la comparacion, soy guest");
+            return "index.html";
+        }
     }
 
     @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
@@ -53,21 +70,18 @@ public class ControladorPrincipal {
          */
     }
 
-    @GetMapping("/CrearUsuario")
-    public String CrearUsuario() {
-
-        return "frmNuevoUsuario.html";
-    }
-
     @PostMapping("/PersistirUsuario")
-    public String persistirUser(@RequestParam String usr, @RequestParam String pass, @RequestParam String email, @RequestParam String telefono, ModelMap modelo) throws Excepciones {
+    public String persistirUser(@RequestParam String usr,
+            @RequestParam String pass,
+            @RequestParam String email,
+            @RequestParam String telefono, ModelMap modelo) throws Excepciones {
 
         try {
             System.out.println("usr");
             uS.CrearUsuario(usr, pass, Rol.ADMINISTRADOR, zS.ObtenerDatosDeZonaPorId("1"), null, email, telefono, true);
             modelo.put("exito", "Usuario cargado con exito");
             return "UsuarioCargadoConExito.html";
-           
+
         } catch (Exception e) {
             modelo.put("error", "Hubo algun error en la carga del usuario");
             return "UsuarioCargadoConExito.html";
@@ -76,13 +90,14 @@ public class ControladorPrincipal {
     }
 
     @GetMapping("/RedirectMain")
-         public String redireccionandoUsuario() throws InterruptedException {
+    public String redireccionandoUsuario() throws InterruptedException {
 
         Thread.sleep(2 * 1000);
         return "index.html";
 
     }
 
+    /*
     @GetMapping("/PaginaPrincipal")
     public String PaginaPrincipal(HttpSession session, ModelMap modelo) {
 
@@ -94,7 +109,7 @@ public class ControladorPrincipal {
         return "index.html";
 
     }
-
+     */
     @GetMapping("/login")
     public String PaginaLogin() {
 
