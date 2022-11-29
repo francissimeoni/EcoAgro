@@ -7,6 +7,7 @@ import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import com.EcoAgro.EcoAgro.Repositorios.CategoriaRepositorio;
 import com.EcoAgro.EcoAgro.Repositorios.CultivosRepositorio;
 import com.EcoAgro.EcoAgro.Repositorios.ImagenesRepositorio;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,4 +117,15 @@ public class CultivosServicios {
 
         cultivosRepositorio.delete(cultivo);
     }
+
+
+public ArrayList<Cultivos> UltimasNoticias(){
+
+    
+    
+    return null;
+    
 }
+
+}
+
