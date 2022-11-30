@@ -31,7 +31,7 @@ h2.logo-nombre{
 .Logo{
     display: flex;
     align-items: center;
-    
+
 }
 .logo-img{
     height: 80px;
@@ -59,11 +59,10 @@ nav a{
     padding: 20px;
 }
 .imagen .item{
-    width: 400px;
-    height: 250px;
-    object-fit: cover;
-    align-items: center;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 .lineadivisora{
     margin-left: 200px;

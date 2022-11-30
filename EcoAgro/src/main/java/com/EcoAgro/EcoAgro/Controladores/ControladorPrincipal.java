@@ -3,6 +3,8 @@ package com.EcoAgro.EcoAgro.Controladores;
 import com.EcoAgro.EcoAgro.Entidades.Usuarios;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
+import com.EcoAgro.EcoAgro.Interfaces.CapturadorErrores;
+import com.EcoAgro.EcoAgro.Servicios.EventosServicios;
 import com.EcoAgro.EcoAgro.Servicios.UsuariosServicios;
 import com.EcoAgro.EcoAgro.Servicios.ZonasServicios;
 import java.util.Date;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
-public class ControladorPrincipal {
+public class ControladorPrincipal implements CapturadorErrores {
 
     @Autowired
     UsuariosServicios uS;
@@ -30,14 +32,15 @@ public class ControladorPrincipal {
 
     //@PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
     @GetMapping("/PaginaPrincipal")
-    public String PaginaPrincipal(ModelMap modelo, HttpSession session) {
+    public String PaginaPrincipal(ModelMap modelo, HttpSession session) throws Excepciones {
 
         Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
-
+        Integer numero;
         if (logueado != null) {
 
             if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
                 modelo.put("sesion", "admin");
+
                 return "index.html";
 
             } else {
@@ -51,11 +54,10 @@ public class ControladorPrincipal {
         }
     }
 
-    @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
-    @GetMapping("/CrearZona")
-    public void CrearZona() throws Excepciones {
-
-        /*  
+    // @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
+    //@GetMapping("/CrearZona")
+    //public String CrearZona() throws Excepciones {
+    /*  
         
         zS.CrearZona("SudOeste");
         zS.CrearZona("Centro Sur");
@@ -66,9 +68,8 @@ public class ControladorPrincipal {
 
         // return "index.html";
         
-         */
-    }
-
+     */
+    //}
     @PostMapping("/PersistirUsuario")
     public String persistirUser(@RequestParam String usr,
             @RequestParam String pass,
@@ -93,20 +94,14 @@ public class ControladorPrincipal {
 
         return "contacto.html";
     }
-    
+
     @GetMapping("/QuienesSomos")
     public String QuienesSomos(ModelMap modelo) {
 
         return "quienesSomos.html";
     }
-    
-    
-    @GetMapping("/PreguntasFrecuentes")
-    public String PreguntasFrecuentes(ModelMap modelo) {
 
-        return "preguntasFrecuentes.html";
-    }
-
+  
     @GetMapping("/RedirectMain")
     public String redireccionandoUsuario() throws InterruptedException {
 
@@ -115,19 +110,14 @@ public class ControladorPrincipal {
 
     }
 
-    /*
-    @GetMapping("/PaginaPrincipal")
-    public String PaginaPrincipal(HttpSession session, ModelMap modelo) {
-
-        Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
-
-//        if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
-//            return "redirect:/admin/dashboard";
-//        }
-        return "index.html";
+    @GetMapping("/PreguntasFrecuentes")
+    public String PreguntasFrecuentes() {
+       
+        
+        return "preguntas.html";
 
     }
-     */
+
     @GetMapping("/login")
     public String PaginaLogin(ModelMap modelo) {
 
@@ -136,9 +126,16 @@ public class ControladorPrincipal {
     }
 
     @GetMapping("/failLoad")
-    public String failLoad(ModelMap modelo) {
+    public String failLoad(ModelMap modelo) throws Excepciones {
         modelo.put("error", "Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
+        //   RegistrarEvento("Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
         return "iniciarsesion.html";
+    }
+
+    @Override
+    public void RegistrarEvento(String error) {
+        EventosServicios eS = new EventosServicios();
+        eS.NuevoEvento(error);
     }
 
 }
