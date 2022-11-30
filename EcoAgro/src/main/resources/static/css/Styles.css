@@ -121,14 +121,15 @@ nav #nb:hover{
 
 
 .imagenesCampo{
-    width: 120px;
-    height: 120px;
-    margin-left: 10px;
-    margin-bottom: 50px;
+    width: 110px;
+    height: 112px;
+    margin-left: -975;
+    margin-bottom: 41px;
     position: relative;
-    top: 25px;
+    top: 7px;
     bottom: 15px;
     left: 10px;
+    border-radius: 15px;
 }
 
 
@@ -173,14 +174,14 @@ nav #nb:hover{
 
 .texto{
     background-color: rgb(255, 255, 255);
-    margin-top: -153px;
+    margin-top: -174px;
     height: 128px;
     border-radius: 20px;
 }
 #titulo{
 
     color: rgb(50, 50, 50);
-    margin-left: 180px;
+    margin-left: 158px;
     font-family: Lato,sans-serif;
     font-size: 20pt;
     font-weight: 200;
@@ -192,8 +193,8 @@ nav #nb:hover{
     text-align: justify;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin-right: 20px;
-    margin-left: 180px;
-    margin-top: 30px;
+    margin-left: 155px;
+    margin-top: 10px;
     padding-left: 5px;
 }
 
@@ -211,7 +212,7 @@ nav #nb:hover{
 /*-----------------------------------------------------------------*/
 .pie-pagina {
     width: 100%;
-    background-color: rgb(112, 218, 74);
+    background-color: #88d166;
     margin-top: 40px;
 }
 .pie-pagina .grupo-1 {

@@ -1,18 +1,17 @@
 package com.EcoAgro.EcoAgro.Repositorios;
 
+import com.EcoAgro.EcoAgro.Entidades.Eventos;
 import com.EcoAgro.EcoAgro.Entidades.Usuarios;
-import java.util.ArrayList;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuariosRepositorio extends JpaRepository<Usuarios, String> {
+public interface EventosRepositorio extends JpaRepository<Eventos, String> {
 
-    
-    @Query("select u from Usuarios u where u.correo= :parametro or u.usuario= :parametro")
-    public Usuarios buscarPorEmailoUsuario(@Param("parametro")String parametro);
-    
+    @Query("select e from Eventos e order by fecha asc")
+    public List<Eventos> ListarPorFechaAscendente();
 
 }

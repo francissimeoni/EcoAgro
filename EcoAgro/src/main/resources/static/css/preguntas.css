@@ -1,0 +1,81 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 2%;
+
+}
+
+
+h4 {
+  text-align: center;
+  font-size: 40px;
+  color: darkgreen;
+  font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
+}
+
+h3 {
+  font-family:"Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
+}
+
+.container {
+  width: 90%;
+  margin: 100px auto;
+}
+
+.container-faq {
+  box-shadow: 0 0 15px -1px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.container-faq .title-faq {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.container-faq .item-faq {
+  box-shadow: 0 0 15px -1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.container-faq .item-faq .question {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(32, 76, 41, 0.2);
+  padding: 20px 20px 20px 80px;
+  transition: 0.4s;
+}
+
+.container-faq .item-faq .question .more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px -1px rgba(0, 0, 0, 0.2);
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.container-faq .item-faq .question .more:hover {
+  box-shadow: 0 0 15px -1px rgba(0, 0, 0, 0.4);
+}
+
+.container-faq .item-faq .question span {
+  position: absolute;
+  left: 10px;
+  font-size: 3rem;
+  top: 10px;
+  color: darkgreen;
+}
+
+.container-faq .item-faq .answer {
+  position: center;
+  padding: 0 20px 0 80px;
+  font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
+}

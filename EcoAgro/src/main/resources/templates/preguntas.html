@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Preguntas frecuentes</title>
+        <link rel="stylesheet" href="/css/preguntas.css" />
+
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/Styles.css">
+        <link rel="stylesheet" href="/css/estilo_info.css">
+
+        <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous">
+        </script>
+
+    </head>
+    <body>
+
+        <div th:if="${sesion != 'admin'}">
+            <header th:replace="/fragments/header::header"></header>
+        </div>
+        <header sec:authorize="hasAnyRole('ADMINISTRADOR', 'PRODUCTOR')"
+                th:replace="/fragments/HeaderLogueado::headerLogueado"></header>
+    </head>
+
+    <div class="container">
+        <div class="row">
+            <div class="container-faq">
+                <div class="title-faq">
+                    <h4>Preguntas Frecuentes</h4>
+                </div>
+
+                <div class="item-faq">
+                    <div class="question">
+                        <h3>
+                            Cuáles son los roles del usuario?
+                            <span>1</span>
+                        </h3>
+                    </div>
+                    <div class="answer">
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Dolores repellat vitae tenetur eos doloremque. Tempora sed ut
+                            consequatur laboriosam sit mollitia beatae error, omnis
+                            deleniti, earum eius odit. Doloribus, nesciunt.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="item-faq">
+                    <div class="question">
+                        <h3>
+                            Puedo publicar mi huerta?
+                            <span>2</span>
+                        </h3>
+                    </div>
+                    <div class="answer">
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Dolores repellat vitae tenetur eos doloremque. Tempora sed ut
+                            consequatur laboriosam sit mollitia beatae error, omnis
+                            deleniti, earum eius odit. Doloribus, nesciunt.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="item-faq">
+                    <div class="question">
+                        <h3>
+                            Todos los vegetales publicados son ecológicos?
+                            <span>3</span>
+                        </h3>
+                    </div>
+                    <div class="answer">
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Dolores repellat vitae tenetur eos doloremque. Tempora sed ut
+                            consequatur laboriosam sit mollitia beatae error, omnis
+                            deleniti, earum eius odit. Doloribus, nesciunt.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="item-faq">
+                    <div class="question">
+                        <h3>
+                            Cómo hago para publicar en el foro?
+                            <span>4</span>
+                        </h3>
+                    </div>
+                    <div class="answer">
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Dolores repellat vitae tenetur eos doloremque. Tempora sed ut
+                            consequatur laboriosam sit mollitia beatae error, omnis
+                            deleniti, earum eius odit. Doloribus, nesciunt.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="item-faq">
+                    <div class="question">
+                        <h3>
+                            Cada cuánto se actualizan las noticias?
+                            <span>5</span>
+                        </h3>
+                    </div>
+                    <div class="answer">
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Dolores repellat vitae tenetur eos doloremque. Tempora sed ut
+                            consequatur laboriosam sit mollitia beatae error, omnis
+                            deleniti, earum eius odit. Doloribus, nesciunt.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Footer-->
+    <div  th:replace="/fragments/Footer::FooterGenerico" </div>
+    <!--::::Pie de Pagina::::::-->
+
+
+</body>
+</html>
