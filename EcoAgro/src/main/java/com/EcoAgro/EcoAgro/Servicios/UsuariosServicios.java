@@ -54,12 +54,12 @@ public class UsuariosServicios implements UserDetailsService {
     }
 
     @Transactional
-    public void ModificarUsuario(String id, String Usuario, String Contraseña, Rol rol,
+    public void ModificarUsuario( String Usuario, String Contraseña, Rol rol,
             Zonas zonas, Date fechaDeRegistro, String correo,
             String telefono, boolean ActivoSiNo) throws Excepciones {
         Usuarios ObjUsuarios = new Usuarios();
 
-        ObjUsuarios = ObtenerUsuariosPorId(id);
+      
         ObjUsuarios.setUsuario(Usuario);
         ObjUsuarios.setContraseña(new BCryptPasswordEncoder().encode(Contraseña));;
         ObjUsuarios.setRol(rol);
