@@ -24,7 +24,8 @@ public class Eventos {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idEvento;
-    @Temporal(TemporalType.DATE)
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     private String motivo;
 

@@ -3,7 +3,6 @@ package com.EcoAgro.EcoAgro.Controladores;
 import com.EcoAgro.EcoAgro.Entidades.Usuarios;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
-import com.EcoAgro.EcoAgro.Interfaces.CapturadorErrores;
 import com.EcoAgro.EcoAgro.Servicios.EventosServicios;
 import com.EcoAgro.EcoAgro.Servicios.UsuariosServicios;
 import com.EcoAgro.EcoAgro.Servicios.ZonasServicios;
@@ -22,13 +21,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
-public class ControladorPrincipal implements CapturadorErrores {
+public class ControladorPrincipal {
 
     @Autowired
     UsuariosServicios uS;
 
     @Autowired
     ZonasServicios zS;
+
+    @Autowired
+    EventosServicios eS;
+
+    @GetMapping("/actualizarZonaUsuario")
+    public String actualizarZonaUsuario(ModelMap modelo, String usr, String correo, String contraseña,
+            Boolean activoSiNo, Date fechaDeRegistro, Rol rol, String telefono, String usuario, String idZona) throws Excepciones {
+
+        try {
+            
+        uS.ModificarUsuario(usuario, contraseña, rol, zS.ObtenerDatosDeZonaPorId(idZona), fechaDeRegistro, correo, telefono, true);
+        modelo.put("exito", "¡Datos modificados con exito!");
+        
+        } catch (Exception e) {
+        
+        }
+        
+        
+        return null;
+
+    }
 
     //@PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
     @GetMapping("/PaginaPrincipal")
@@ -94,6 +114,12 @@ public class ControladorPrincipal implements CapturadorErrores {
 
         return "contacto.html";
     }
+    
+     @GetMapping("/editarPerfil")
+    public String editarPerfil(ModelMap modelo) {
+
+        return "FrmEditarPerfil.html";
+    }
 
     @GetMapping("/QuienesSomos")
     public String QuienesSomos(ModelMap modelo) {
@@ -101,7 +127,6 @@ public class ControladorPrincipal implements CapturadorErrores {
         return "quienesSomos.html";
     }
 
-  
     @GetMapping("/RedirectMain")
     public String redireccionandoUsuario() throws InterruptedException {
 
@@ -112,8 +137,7 @@ public class ControladorPrincipal implements CapturadorErrores {
 
     @GetMapping("/PreguntasFrecuentes")
     public String PreguntasFrecuentes() {
-       
-        
+
         return "preguntas.html";
 
     }
@@ -127,15 +151,11 @@ public class ControladorPrincipal implements CapturadorErrores {
 
     @GetMapping("/failLoad")
     public String failLoad(ModelMap modelo) throws Excepciones {
-        modelo.put("error", "Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
-        //   RegistrarEvento("Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
-        return "iniciarsesion.html";
-    }
 
-    @Override
-    public void RegistrarEvento(String error) {
-        EventosServicios eS = new EventosServicios();
-        eS.NuevoEvento(error);
+        modelo.put("error", "Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
+        eS.NuevoEvento("Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
+        return "iniciarsesion.html";
+
     }
 
 }

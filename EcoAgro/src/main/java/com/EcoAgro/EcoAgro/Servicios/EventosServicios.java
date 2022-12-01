@@ -2,55 +2,49 @@ package com.EcoAgro.EcoAgro.Servicios;
 
 import com.EcoAgro.EcoAgro.Entidades.Eventos;
 import com.EcoAgro.EcoAgro.Entidades.Usuarios;
-import com.EcoAgro.EcoAgro.Interfaces.CapturadorErrores;
 import com.EcoAgro.EcoAgro.Repositorios.EventosRepositorio;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-public class EventosServicios implements CapturadorErrores {
-    
+public class EventosServicios {
+
     @Autowired
-    EventosRepositorio eR;
-    
+    EventosRepositorio eventoRepositorio;
+
+    @Transactional
     public void NuevoEvento(String error) {
-        
-        try {
-            Calendar c1 = GregorianCalendar.getInstance(Locale.CANADA);
-            Eventos e = new Eventos();
-            
-            System.out.println(c1);
-            e.setFecha(c1.getTime());
-            e.setMotivo(error);
-            
-            eR.save(e);
-        } catch (Exception e) {
-            RegistrarEvento(e.getMessage());
-        }
-        
+
+        Eventos evt = new Eventos();
+        Date fecha = new Date();
+
+        Integer año = fecha.getYear();
+        Integer mes = fecha.getMonth();
+        Integer dia = fecha.getDay() - 3;
+        Integer hora = fecha.getHours() - 3;
+        Integer minutos = fecha.getMinutes();
+        Integer segundos = fecha.getSeconds();
+
+        Date fechaEditada = new Date(año, mes, dia, hora, minutos, segundos);
+
+        System.out.println(fechaEditada);
+
+        evt.setFecha(fechaEditada);
+        evt.setMotivo(error);
+
+        System.out.println(evt.getFecha());
+
+        eventoRepositorio.save(evt);
+
     }
-    
+
     public List<Eventos> mostrarEventos() {
-        
-        List<Eventos> lista;
-        lista = eR.ListarPorFechaAscendente();
-        
+        List<Eventos> lista = eventoRepositorio.ListarPorFechaAscendente();
         return lista;
-        
     }
-    
-    @Override
-    public void RegistrarEvento(String error) {
-        EventosServicios eS = new EventosServicios();
-        eS.NuevoEvento(error);
-    }
-    
 }
