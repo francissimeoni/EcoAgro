@@ -1,65 +1,68 @@
+<!DOCTYPE html>
 <html lang="es" html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="UTF-8" />
-    <title></title>
-    <meta name="viewport"
-        content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
-    <link rel="stylesheet" href="/css/usuario.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/Styles.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous">
-    </script>
-    <link rel='stylesheet' type='text/css' media='screen' href='/css/editarperfil.css'>
-
+  <meta name="viewport"
+    content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+  <link rel="stylesheet" href="/css/usuario.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/Styles.css">
+  <link rel='stylesheet' type='text/css' media='screen' href='/css/editarperfil.css'>
+  <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous">
+  </script>
 </head>
 
 <body>
 
+
+  <div th:if="${sesion != 'admin'}">
     <header th:replace="/fragments/header::header"></header>
+  </div>
+  <header sec:authorize="hasAnyRole('ADMINISTRADOR', 'PRODUCTOR')"
+    th:replace="/fragments/HeaderLogueado::headerLogueado"></header>
+  </head>
 
 
-    <section class="seccion-perfil-usuario">
-        <div class="perfil-usuario-header">
+  <section class="seccion-perfil-usuario">
+    <div class="perfil-usuario-header">
 
 
-        </div>
-        </div>
-        <div class="perfil-usuario-body">
-            <div class="perfil-usuario-bio">
-                <h3 class="titulo" th:text="${'Hola ' + session.SesionDeUsuario.correo}"> </h3>
+    </div>
+    </div>
+    <div class="perfil-usuario-body">
+      <div class="perfil-usuario-bio">
+        <h3 class="titulo">Nombre </h3>
+        <input type="button" value="Editar perfil" onclick="location.href='/editarPerfil'" class="botones" />
+        <input type="submit" value="Información posteos" class="botones" />
+        <input type="submit" value="Cambio de usuario" class="botones" />
+        <input type="submit" value="Visor de eventos" class="botones" />
+        <input type="submit" value="Alta/baja usuarios" class="botones" />
+      </div>
+
+    </div>
+    <div class="perfil-usuario-footer">
+      <ul class="lista-datos">
+        <li><i class="fas fa-solid fa-globe icon"></i> Rol de usuario: <span
+            th:text="${session.SesionDeUsuario.rol}"></span></li>
+        <li><i class="fas fa-regular fa-compass icon"></i> Ciudad: <span
+            th:text="${session.SesionDeUsuario.telefono}"></span></li>
+        <li><i class="fas fa-solid fa-seedling icon"></i> Cultivos del lugar:</li>
+        <li><i class="fas fa-envelope icon"></i> Correo Electronico:</li>
+      </ul>
+
+    </div>
 
 
-                <a href="/editarPerfil" class="link">Edital perfil </a>
-
-                <a href="infoposteos.html" class="link">Información de posteos </a>
-
-                <a href="/PaginaPrincipal" class="link">Volver al inicio </a>
-
-            </div>
-              <div class="perfil-usuario-footer">
-                <ul class="lista-datos">
-                    <li><i class="fas fa-solid fa-globe icon"></i> Rol de usuario: <span
-                            th:text="${session.SesionDeUsuario.rol}"></span></li>
-                    <li><i class="fas fa-regular fa-compass icon"></i> Ciudad: <span
-                            th:text="${session.SesionDeUsuario.telefono}"></span></li>
-                    <li><i class="fas fa-solid fa-seedling icon"></i> Cultivos del lugar:</li>
-                    <li><i class="fas fa-envelope icon"></i> Correo Electronico:</li>
-                </ul>
-
-            </div>
-
-
-            <!-- <div th:replace="/fragments/editarPerfil::EditarPerfil"</div>-->
-
-
-    </section>
-
-    <!--Footer-->
-    <div th:replace="/fragments/Footer::FooterGenerico" </div>
-
-        <!--::::Pie de Pagina::::::-->
+  </section>
+  <div th:replace="/fragments/Footer::FooterGenerico" </div>
 
 
 </body>
+
+
+</html>

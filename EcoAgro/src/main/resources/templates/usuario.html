@@ -1,0 +1,65 @@
+<html lang="es" html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <link rel="stylesheet" href="/css/usuario.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/Styles.css">
+
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous">
+    </script>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/editarperfil.css'>
+
+</head>
+
+<body>
+
+    <header th:replace="/fragments/header::header"></header>
+
+
+    <section class="seccion-perfil-usuario">
+        <div class="perfil-usuario-header">
+
+
+        </div>
+        </div>
+        <div class="perfil-usuario-body">
+            <div class="perfil-usuario-bio">
+                <h3 class="titulo" th:text="${'Hola ' + session.SesionDeUsuario.correo}"> </h3>
+
+
+                <a href="/editarPerfil" class="link">Edital perfil </a>
+
+                <a href="infoposteos.html" class="link">Información de posteos </a>
+
+                <a href="/PaginaPrincipal" class="link">Volver al inicio </a>
+
+            </div>
+              <div class="perfil-usuario-footer">
+                <ul class="lista-datos">
+                    <li><i class="fas fa-solid fa-globe icon"></i> Rol de usuario: <span
+                            th:text="${session.SesionDeUsuario.rol}"></span></li>
+                    <li><i class="fas fa-regular fa-compass icon"></i> Ciudad: <span
+                            th:text="${session.SesionDeUsuario.telefono}"></span></li>
+                    <li><i class="fas fa-solid fa-seedling icon"></i> Cultivos del lugar:</li>
+                    <li><i class="fas fa-envelope icon"></i> Correo Electronico:</li>
+                </ul>
+
+            </div>
+
+
+            <!-- <div th:replace="/fragments/editarPerfil::EditarPerfil"</div>-->
+
+
+    </section>
+
+    <!--Footer-->
+    <div th:replace="/fragments/Footer::FooterGenerico" </div>
+
+        <!--::::Pie de Pagina::::::-->
+
+
+</body>
