@@ -11,15 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
 public class ImagenesServicios {
-    
+
     @Autowired
     private ImagenRepositorio iR;
-    
+
     @Transactional
-    public Imagen guardarFoto(MultipartFile archivo)throws Excepciones{
+    public Imagen guardarImagen(MultipartFile archivo) throws Excepciones {
         if (archivo != null) {
             try {
                 Imagen imagen = new Imagen();
@@ -35,13 +34,12 @@ public class ImagenesServicios {
         }
         return null;
     }
-    
-    
+
     @Transactional
-    public Imagen actualizarFoto(String idImagen, MultipartFile archivo) throws Excepciones{
+    public Imagen actualizarImagen(String idImagen, MultipartFile archivo) throws Excepciones {
         if (archivo != null) {
             try {
-                Imagen imagen= new Imagen();
+                Imagen imagen = new Imagen();
 
                 if (idImagen != null) {
                     Optional<Imagen> respuesta = iR.findById(idImagen);
@@ -59,27 +57,26 @@ public class ImagenesServicios {
             }
 
         }
-        
+
         return null;
-        
-    }    
-    
-    
-    public List<Imagen> buscarFotos(){
-        
+
+    }
+
+    public List<Imagen> buscarImagenes() {
+
         List<Imagen> imagenes = iR.buscarFotos();
-        
+
         return imagenes;
     }
-    
-    public Imagen buscarPorId(String id){
+
+    public Imagen buscarPorId(String id) {
         Optional<Imagen> respuesta = iR.findById(id);
-        
+
         if (respuesta.isPresent()) {
             Imagen imagen = respuesta.get();
             return imagen;
         }
         return null;
-        
-    }    
+
+    }
 }
