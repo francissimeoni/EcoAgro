@@ -1,4 +1,4 @@
-html {
+hhtml {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -51,8 +51,7 @@ body {
 
 .seccion-perfil-usuario .perfil-usuario-footer,
 .seccion-perfil-usuario .perfil-usuario-bio {
-  display: flex;
-  flex-wrap: wrap;
+
   padding: 1.5rem 2rem;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
   background-color: #fff;
