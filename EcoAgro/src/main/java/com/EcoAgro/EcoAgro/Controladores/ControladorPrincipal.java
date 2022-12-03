@@ -1,6 +1,7 @@
 package com.EcoAgro.EcoAgro.Controladores;
 
 import com.EcoAgro.EcoAgro.Entidades.Usuarios;
+import com.EcoAgro.EcoAgro.Entidades.Zonas;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import com.EcoAgro.EcoAgro.Servicios.EventosServicios;
@@ -14,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,25 +34,7 @@ public class ControladorPrincipal {
     @Autowired
     EventosServicios eS;
 
-    @GetMapping("/actualizarZonaUsuario")
-    public String actualizarZonaUsuario(ModelMap modelo, String usr, String correo, String contraseña,
-            Boolean activoSiNo, Date fechaDeRegistro, Rol rol, String telefono, String usuario, String idZona) throws Excepciones {
-
-        try {
-            
-        uS.ModificarUsuario(usuario, contraseña, rol, zS.ObtenerDatosDeZonaPorId(idZona), fechaDeRegistro, correo, telefono, true);
-        modelo.put("exito", "¡Datos modificados con exito!");
-        
-        } catch (Exception e) {
-        
-        }
-        
-        
-        return null;
-
-    }
-
-    //@PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
+    // @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
     @GetMapping("/PaginaPrincipal")
     public String PaginaPrincipal(ModelMap modelo, HttpSession session) throws Excepciones {
 
@@ -75,30 +59,33 @@ public class ControladorPrincipal {
     }
 
     // @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
-    //@GetMapping("/CrearZona")
-    //public String CrearZona() throws Excepciones {
-    /*  
-        
-        zS.CrearZona("SudOeste");
-        zS.CrearZona("Centro Sur");
-        zS.CrearZona("Oeste");
-        zS.CrearZona("Centro");
-        zS.CrearZona("Centro este");
-        zS.CrearZona("Noroeste");
-
-        // return "index.html";
-        
+    // @GetMapping("/CrearZona")
+    // public String CrearZona() throws Excepciones {
+    /*
+     * 
+     * zS.CrearZona("SudOeste");
+     * zS.CrearZona("Centro Sur");
+     * zS.CrearZona("Oeste");
+     * zS.CrearZona("Centro");
+     * zS.CrearZona("Centro este");
+     * zS.CrearZona("Noroeste");
+     * 
+     * // return "index.html";
+     * 
      */
-    //}
+    // }
     @PostMapping("/PersistirUsuario")
     public String persistirUser(@RequestParam String usr,
             @RequestParam String pass,
             @RequestParam String email,
-            @RequestParam String telefono, ModelMap modelo) throws Excepciones {
+            @RequestParam String telefono, String zona, ModelMap modelo) throws Excepciones {
+
+        System.out.println(zona);
 
         try {
             System.out.println("usr");
-            uS.CrearUsuario(usr, pass, Rol.ADMINISTRADOR, zS.ObtenerDatosDeZonaPorId("1"), null, email, telefono, true);
+            uS.CrearUsuario(usr, pass, Rol.USUARIO, zS.ObtenerDatosDeZonaPorId("1"),
+                    null, email, telefono, true);
             modelo.put("exito", "Usuario cargado con exito");
             return "UsuarioCargadoConExito.html";
 
@@ -114,8 +101,8 @@ public class ControladorPrincipal {
 
         return "contacto.html";
     }
-    
-     @GetMapping("/editarPerfil")
+
+    @GetMapping("/editarPerfil")
     public String editarPerfil(ModelMap modelo) {
 
         return "FrmEditarPerfil.html";

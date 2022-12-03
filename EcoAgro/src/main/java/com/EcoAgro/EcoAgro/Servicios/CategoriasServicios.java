@@ -6,18 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class CategoriasServicios {
 
     @Autowired
     CategoriaRepositorio cR;
 
-    public void crearCategoria(String nombre) {
+    public Categorias crearCategoria(String nombre) {
         Categorias c = new Categorias();
         c.setNombre(nombre);
 
-        cR.save(c);
+        return cR.save(c);
 
     }
 

@@ -1,7 +1,6 @@
 package com.EcoAgro.EcoAgro.Entidades;
 
 //import java.util.ArrayList;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,8 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 //import javax.persistence.OneToMany;//
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,25 +28,13 @@ public class Cultivos {
 
     private String nombre;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaSiembra;
-    @Temporal(TemporalType.DATE)
-    private Date fechaCosecha;
-
     @ManyToOne
     @JoinColumn(name = "idCategorias", insertable = true, updatable = true)
     private Categorias Categorias;
 
-    private Float densidadPlantacion;
-    private Float requerimientosHidricos;
-    private Float temperaturaCrecimiento;
-    private Boolean siembraDirectaSiNo;
-    private Float temperaturaMinima;
-    private Float temperaturaOptima;
-    private Integer MeGusta;
+    private String informacion;
 
-   
     @OneToOne
     private Imagen imagen;
 
-     }
+}

@@ -1,4 +1,5 @@
 package com.EcoAgro.EcoAgro.Servicios;
+
 import com.EcoAgro.EcoAgro.Entidades.Categorias;
 import com.EcoAgro.EcoAgro.Entidades.Cultivos;
 import com.EcoAgro.EcoAgro.Entidades.Imagen;
@@ -7,11 +8,11 @@ import com.EcoAgro.EcoAgro.Repositorios.CategoriaRepositorio;
 import com.EcoAgro.EcoAgro.Repositorios.CultivosRepositorio;
 import java.util.ArrayList;
 import com.EcoAgro.EcoAgro.Repositorios.ImagenRepositorio;
-import java.util.Date;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CultivosServicios {
@@ -25,79 +26,57 @@ public class CultivosServicios {
     @Autowired
     private ImagenRepositorio imagenesRepositorio;
 
+    @Autowired
+    private ImagenesServicios imagenesServicios;
+
+    @Autowired
+    private CategoriasServicios categoriasServicios;
+
     @Transactional
-    public void crearCultivo(String idCultivos, String nombre, String idCategorias, String idImagenes,
-            Date fechaSiembra, Date fechaCosecha, float densidadPlantacion, float requerimientosHidricos,
-            float temperaturaCrecimiento, float temperaturaMinima, float temperaturaOptima,
-            boolean siembraDirectaSiNo, Integer meGusta) throws Excepciones {
+    public void crearCultivo(String nombre,
+            String información, MultipartFile archivo) throws Excepciones {
 
         Cultivos cultivo = new Cultivos();
-        Categorias categoria = new Categorias();
-        Imagen imagen = new Imagen();
+        Categorias categoria = categoriasServicios.crearCategoria(nombre);
+        Imagen imagen = imagenesServicios.guardarImagen(archivo);
 
-        Optional<Categorias> opCategorias = categoriaRepositorio.findById(idCategorias);
-        if (opCategorias.isPresent()) {
-            categoria = opCategorias.get();
-        }
-        
-   
-
-        cultivo.setIdcultivo(idCultivos);
         cultivo.setNombre(nombre);
         cultivo.setCategorias(categoria);
-        //cultivo.setImagenes(imagen);
-        cultivo.setFechaSiembra(fechaSiembra);
-        cultivo.setFechaCosecha(fechaCosecha);
-        cultivo.setDensidadPlantacion(densidadPlantacion);
-        cultivo.setRequerimientosHidricos(requerimientosHidricos);
-        cultivo.setTemperaturaCrecimiento(temperaturaCrecimiento);
-        cultivo.setTemperaturaMinima(temperaturaMinima);
-        cultivo.setTemperaturaOptima(temperaturaOptima);
-        cultivo.setSiembraDirectaSiNo(siembraDirectaSiNo);
-        cultivo.setMeGusta(meGusta);
+        cultivo.setImagen(imagen);
+        cultivo.setInformacion(información);
 
         cultivosRepositorio.save(cultivo);
 
     }
 
     @Transactional
-    public void modificarCultivo(String idCultivos, String nombre, String idCategorias, String idImagenes,
-            Date fechaSiembra, Date fechaCosecha, float densidadPlantacion, float requerimientosHidricos,
-            float temperaturaCrecimiento, float temperaturaMinima, float temperaturaOptima,
-            boolean siembraDirectaSiNo, Integer meGusta) throws Excepciones {
+    public void modificarCultivo(String idCultivos, String nombre, String idCategorias,
+            String información, MultipartFile archivo) throws Excepciones {
 
-        Cultivos cultivo = new Cultivos();
         Categorias categoria = new Categorias();
-        Imagen imagen = new Imagen();
 
         Optional<Categorias> opCategorias = categoriaRepositorio.findById(idCategorias);
         if (opCategorias.isPresent()) {
             categoria = opCategorias.get();
         }
-        Optional<Imagen> opImagenes = imagenesRepositorio.findById(idImagenes);
-        if (opImagenes.isPresent()) {
-            imagen = opImagenes.get();
+
+        Optional<Cultivos> respuesta = cultivosRepositorio.findById(idCultivos);
+
+        Imagen imagen = new Imagen();
+        String idImagen;
+        if (respuesta.isPresent()) {
+
+            Cultivos cultivo = respuesta.get();
+            if (cultivo.getImagen() != null) {
+                idImagen = cultivo.getImagen().getId();
+                imagen = imagenesServicios.actualizarImagen(idImagen, archivo);
+            }
+            cultivo.setNombre(nombre);
+            cultivo.setCategorias(categoria);
+            cultivo.setImagen(imagen);
+
+            cultivosRepositorio.save(cultivo);
         }
-
-        Optional<Cultivos> opCultivos = cultivosRepositorio.findById(idCultivos);
-        if (opCultivos.isPresent()) {
-            cultivo = opCultivos.get();
-        }
-        cultivo.setNombre(nombre);
-        cultivo.setCategorias(categoria);
-        cultivo.setImagen(imagen);
-        cultivo.setFechaSiembra(fechaSiembra);
-        cultivo.setFechaCosecha(fechaCosecha);
-        cultivo.setDensidadPlantacion(densidadPlantacion);
-        cultivo.setRequerimientosHidricos(requerimientosHidricos);
-        cultivo.setTemperaturaCrecimiento(temperaturaCrecimiento);
-        cultivo.setTemperaturaMinima(temperaturaMinima);
-        cultivo.setTemperaturaOptima(temperaturaOptima);
-        cultivo.setSiembraDirectaSiNo(siembraDirectaSiNo);
-        cultivo.setMeGusta(meGusta);
-
-        cultivosRepositorio.save(cultivo);
-
     }
 
     public void eliminarCultivo(String idCultivos) throws Excepciones {
@@ -112,14 +91,10 @@ public class CultivosServicios {
         cultivosRepositorio.delete(cultivo);
     }
 
+    public ArrayList<Cultivos> UltimasNoticias() {
 
-public ArrayList<Cultivos> UltimasNoticias(){
+        return null;
 
-    
-    
-    return null;
-    
-}
+    }
 
 }
-

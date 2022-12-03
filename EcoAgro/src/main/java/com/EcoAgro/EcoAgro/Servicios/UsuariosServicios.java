@@ -36,9 +36,8 @@ public class UsuariosServicios implements UserDetailsService {
             String telefono, boolean ActivoSiNo) throws Excepciones {
         Usuarios ObjUsuarios = new Usuarios();
 
-        
         validaciones(Usuario, Contraseña, correo, telefono);
-        //SeguridadDeClave(Contraseña);
+        // SeguridadDeClave(Contraseña);
 
         ObjUsuarios.setUsuario(Usuario);
         ObjUsuarios.setContraseña(new BCryptPasswordEncoder().encode(Contraseña));
@@ -54,17 +53,14 @@ public class UsuariosServicios implements UserDetailsService {
     }
 
     @Transactional
-    public void ModificarUsuario( String Usuario, String Contraseña, Rol rol,
-            Zonas zonas, Date fechaDeRegistro, String correo,
+    public void ModificarUsuario(String Usuario, String Contraseña,
+            Zonas zonas, String correo,
             String telefono, boolean ActivoSiNo) throws Excepciones {
         Usuarios ObjUsuarios = new Usuarios();
 
-      
         ObjUsuarios.setUsuario(Usuario);
-        ObjUsuarios.setContraseña(new BCryptPasswordEncoder().encode(Contraseña));;
-        ObjUsuarios.setRol(rol);
+        ObjUsuarios.setContraseña(new BCryptPasswordEncoder().encode(Contraseña));
         ObjUsuarios.setZonas(zonas);
-        ObjUsuarios.setFechaDeRegistro(fechaDeRegistro);
         ObjUsuarios.setCorreo(correo);
         ObjUsuarios.setTelefono(telefono);
         ObjUsuarios.setActivoSiNo(ActivoSiNo);
@@ -83,8 +79,8 @@ public class UsuariosServicios implements UserDetailsService {
 
     @Transactional
     public void ActualizarUsuarioActivoSiNo(boolean valor, String id) throws Excepciones {
-//Si se recibe true quiere decir que hay que activarlo
-// Si recibe false quiere decir que hay que desactivarlo
+        // Si se recibe true quiere decir que hay que activarlo
+        // Si recibe false quiere decir que hay que desactivarlo
 
         if (id.equalsIgnoreCase("")) {
             throw new Excepciones("Tenes que seleccionar un usuario para desactivarlo");
@@ -96,6 +92,28 @@ public class UsuariosServicios implements UserDetailsService {
             uR.save(ObjUsuarios);
 
         }
+
+    }
+
+    @Transactional
+    public void cambiarRol(String rol, String idUsuario) throws Excepciones {
+
+        Usuarios u = new Usuarios();
+        u = ObtenerUsuariosPorId(idUsuario);
+
+        if (rol.equalsIgnoreCase("ADMINISTRADOR")) {
+            u.setRol(Rol.ADMINISTRADOR);
+        }
+
+        if (rol.equalsIgnoreCase("PRODUCTOR")) {
+            u.setRol(Rol.PRODUCTOR);
+        }
+
+        if (rol.equalsIgnoreCase("USUARIO")) {
+            u.setRol(Rol.USUARIO);
+        }
+
+        uR.save(u);
 
     }
 
@@ -136,13 +154,12 @@ public class UsuariosServicios implements UserDetailsService {
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
             permisos.add(p);
 
-            //una vez que ya se logueo, guardamos el usuario para utilizar sus datos durante la sesion
+            // una vez que ya se logueo, guardamos el usuario para utilizar sus datos
+            // durante la sesion
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
 
             session.setAttribute("SesionDeUsuario", usuario);
-            
-         
 
             User user = new User(usuario.getUsuario(), usuario.getContraseña(), permisos);
             return user;
@@ -180,7 +197,7 @@ public class UsuariosServicios implements UserDetailsService {
     }
     /////// ----> final login
 
-/////// ----> validaciones
+    /////// ----> validaciones
     public void validaciones(String usuario, String contraseña,
             String correo, String telefono) throws Excepciones, Excepciones {
 
@@ -205,7 +222,8 @@ public class UsuariosServicios implements UserDetailsService {
     public void SeguridadDeClave(String clave) throws Excepciones {
 
         if (!scannerPassword(clave)) {
-            throw new Excepciones(("La contraseña debe contener por lo menos un signo, una mayuscula y una longitud minima de 8 caracteres."));
+            throw new Excepciones(
+                    ("La contraseña debe contener por lo menos un signo, una mayuscula y una longitud minima de 8 caracteres."));
         }
     }
 

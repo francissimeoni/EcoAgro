@@ -15,6 +15,17 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/agro2.css" />
     <!--Iconos-->
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+
+    <script>
+
+        function redireccionarPagina() {
+            windows.location = '/login';
+}
+
+        setTimeout("redireccionarPagina()", 5000);
+
+
+    </script>
 </head>
 
 
@@ -26,6 +37,7 @@
             <img src="img/Logo.png" alt="error" class="logo-img">
             <h2 class="logo-nombre">ECOAGRO</h2>
         </div>
+        
         <nav>
             <a href="/login" class="nav-link" th:if="${session.sessionDeUsuario != null}" tx:text="Iniciar sesion"></a>
             <a href="cultivos__.html" class="nav-link">Categorias</a>
@@ -44,7 +56,7 @@
     <!--Carru-->
     <!---------------------------------------------------------------------------->
 
-    
+
 
     <br><br><br>
     <div class="alert alert-success" role="alert">
