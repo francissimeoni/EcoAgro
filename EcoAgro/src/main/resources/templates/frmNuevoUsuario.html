@@ -38,7 +38,7 @@
 
                 <select onchange="trasladarValor();" th:object="${z}" id="selectZona" style="border-radius: 0%;"
                     class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <!--      <option selected>¿En que zona vivis?</option>-->
+           <option selected></option>
                     <option th:each="z : ${zonas}" th:value="${z.idZonas}" th:text="${z.nombre}"></option>
                 </select>
 

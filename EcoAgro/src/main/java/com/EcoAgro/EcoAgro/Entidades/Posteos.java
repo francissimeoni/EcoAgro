@@ -38,7 +38,7 @@ public class Posteos {
     private Usuarios usuario;
     private Integer visualizaciones;
     private String posteoTexto;
-    private boolean activoSiNo;
+    private Boolean activoSiNo;
     @OneToOne
     private Imagen imagen;
 }

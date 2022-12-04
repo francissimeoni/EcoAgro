@@ -32,6 +32,10 @@ public class Cultivos {
     @JoinColumn(name = "idCategorias", insertable = true, updatable = true)
     private Categorias Categorias;
 
+    @OneToOne
+    @JoinColumn(name = "idZonas", insertable = true, updatable = true)
+    private Zonas zona;
+
     private String informacion;
 
     @OneToOne
