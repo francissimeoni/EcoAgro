@@ -3,6 +3,7 @@ package com.EcoAgro.EcoAgro.Controladores;
 import com.EcoAgro.EcoAgro.Entidades.Zonas;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
+import com.EcoAgro.EcoAgro.Servicios.SolicitudesDeActualizacionDeRolesServicio;
 import com.EcoAgro.EcoAgro.Servicios.UsuariosServicios;
 import com.EcoAgro.EcoAgro.Servicios.ZonasServicios;
 
@@ -12,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/Usuarios")
@@ -21,6 +23,8 @@ public class ControladorUsuario {
     UsuariosServicios uS;
     @Autowired
     ZonasServicios zS;
+    @Autowired
+    SolicitudesDeActualizacionDeRolesServicio sarS;
 
     @GetMapping("/CrearUsuario")
     public String CrearUsuario(ModelMap modelo) {
@@ -40,4 +44,66 @@ public class ControladorUsuario {
 
     }
 
+    @GetMapping("/SolicitarActualizacionDeRol")
+    public String actualizarRol(ModelMap modelo, @RequestParam String IdUsuario, @RequestParam String rol) {
+
+        if (rol.equalsIgnoreCase("ADMINISTRADOR")) {
+            sarS.CrearSolicitud(IdUsuario, Rol.ADMINISTRADOR);
+        }
+
+        if (rol.equalsIgnoreCase("PRODUCTOR")) {
+            sarS.CrearSolicitud(IdUsuario, Rol.PRODUCTOR);
+        }
+
+        if (rol.equalsIgnoreCase("USUARIO")) {
+            sarS.CrearSolicitud(IdUsuario, Rol.USUARIO);
+        }
+
+        return "frmNuevoUsuario.html";
+
+    }
+
+    @GetMapping("/gestionarRol")
+    public void gestionarRol(ModelMap modelo, @RequestParam String IdUsuario, @RequestParam String rol, Boolean AutorizoSiNo) throws Excepciones {
+
+        if (AutorizoSiNo == true) {
+
+            try {
+
+                if (rol.equalsIgnoreCase("ADMINISTRADOR")) {
+                    uS.cambiarRol(Rol.ADMINISTRADOR, IdUsuario);
+                }
+
+                if (rol.equalsIgnoreCase("PRODUCTOR")) {
+                    uS.cambiarRol(Rol.PRODUCTOR, IdUsuario);
+                }
+
+                if (rol.equalsIgnoreCase("USUARIO")) {
+                    uS.cambiarRol(Rol.USUARIO, IdUsuario);
+                }
+
+                sarS.EliminarSolicitud(IdUsuario);
+
+                modelo.put("exito", "exito");
+
+            } catch (Exception e) {
+
+                modelo.put("error", "error");
+
+            }
+
+        } else {
+
+            try {
+                sarS.EliminarSolicitud(IdUsuario);
+                modelo.put("exito", "exito");
+
+            } catch (Exception e) {
+
+                modelo.put("error", "error");
+
+            }
+
+        }
+    }
 }

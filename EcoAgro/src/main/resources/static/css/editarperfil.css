@@ -46,7 +46,7 @@ input[type="password"] {
   margin-left: 1px;
   border: none;
   color: white;
-  font-size: 20px;
+  font-size: 10px;
   background: #356718;
   padding: 12px 20px;
   border-radius: 5px;
@@ -72,4 +72,48 @@ p {
     margin-top: 100px;
     border-radius: 2%;
   }
+}
+
+.switch{
+  display: block;
+  margin: 20px;
+  padding: 10px;
+  margin-left: 20px;
+}
+.switch-label{
+  display: inline-block;
+  width: 55px;
+  height: 30px;
+  background-color: #999;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+}
+#switch-input:checked~ .switch-label{
+  background-color: #356718;
+}
+.switch-label::after{
+  position: absolute;
+  content: '';
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 100px;
+  top: 4px;
+  left: 5px;
+  transition: 0.3s;
+}
+#switch-input:checked~ .switch-label::after{
+  left: 28px;
+}
+#switch-activar, #switch-desactivar{
+  margin: 5px;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  bottom: 10px;
+}
+#switch-input{
+  display: none;
 }
