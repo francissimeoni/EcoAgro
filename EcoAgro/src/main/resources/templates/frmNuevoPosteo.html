@@ -22,10 +22,10 @@
         th:replace="/fragments/HeaderLogueado::headerLogueado"></header>
     </head>
     <br>
-    <h3 style="text-align:center; width: 100%;">Cargar nueva noticia</h3>
+    <h3 style="text-align:center; width: 100%;">Crear un nuevo posteo</h3>
 
     <div style="width: 600px ; margin-left: 70px; position: relative;">
-        <form action="/Cultivos/PersistirCultivo" method="POST" type="POST" enctype="multipart/form-data">
+        <form action="/foro/persistirPost" method="POST" type="POST" enctype="multipart/form-data">
             <div class="row g-3">
                 <div class="col-sm-6">
 
@@ -34,10 +34,10 @@
                     <br>
 
                     <div class="alert alert-danger" role="alert" th:if="${error != null}">
-                        Hubo algun error en la carga del usuario
+                        Hubo algun error en la carga del posteo
                     </div>
 
-                    <label for="firstName" class="form-label">Titulo de noticia</label>
+                    <label for="firstName" class="form-label">Titulo de posteo</label>
                     <input onkeyup="comprobaciones();" type="text" class="form-control" id="nombre" name="nombre">
                     <br>
                     <label for="firstName" class="form-label">Seleccione una categoria</label>
@@ -50,17 +50,9 @@
 
                     <input type="text" id="categoria" name="categoria">
                     <br>
-                    <label for="firstName" class="form-label">Seleccione una zona</label>
-                    <select onkeyup="comprobaciones();" class="form-select" onchange="trasladarValorZona();"
-                        th:object="${z}" id="selectZona" style="border-radius: 5%;"
-                        aria-label=".form-select-lg example">
-                        <option selected></option>
-                        <option th:each="z : ${zonas}" th:value="${z.idZonas}" th:text="${z.nombre}"></option>
-                    </select>
-
-                    <input type="text" name="zona" id="zona">
+                  
                     <br>
-                    <label for="firstName" class="form-label">Contanos de que se trata la noticia</label>
+                    <label for="firstName" class="form-label">Contanos de que se trata tu posteo</label>
                     <textarea onkeyup="comprobaciones();" name="informacion" id="informacion" cols="80"
                         rows="5"></textarea>
                     <br>
@@ -80,7 +72,7 @@
 
 
         var impTitulo = document.getElementById('nombre');
-        var impZona = document.getElementById('zona');
+       
         var impCategoria = document.getElementById('categoria');
         var impDescripcion = document.getElementById('informacion');
         var ImpImg = document.getElementById('img');
@@ -90,7 +82,7 @@
 
         function comprobaciones() {
 
-            if (impTitulo.value != "" && impZona.value != "" && impCategoria.value != "" && impDescripcion.value != "") {
+            if (impTitulo.value != "" && impCategoria.value != "" && impDescripcion.value != "") {
                 ImpBtn.hidden = false;
             } else {
                 ImpBtn.hidden = true;
@@ -103,14 +95,11 @@
         }
 
 
-        impZona.hidden = true;
+        
         impCategoria.hidden = true
 
 
-        function trasladarValorZona() {
-            var cod = document.getElementById('selectZona').value;
-            impZona.value = cod;
-        }
+  
 
         function trasladarValorCategoria() {
             var cod = document.getElementById('selectCategoria').value;

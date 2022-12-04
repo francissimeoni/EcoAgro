@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Foro agroecologico</title>
@@ -27,59 +27,232 @@
 
         <header th:replace="/fragments/header::header"></header>
     </div>
-
+<!-- 
     <header sec:authorize="hasAnyRole('ADMINISTRADOR', 'PRODUCTOR')"
         th:replace="/fragments/HeaderLogueado::headerLogueado">
-    </header>
+    </header> -->
 
 
 
 
     <!-------------------------------------------------->
 
-    <div th:replace="/fragments/MenuContextual::MenuLateral" </div></div>
-
-    <div class="buscar">
-        <input type="search" placeholder="Buscar" required>
-        <div class="btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
+    <main class="container">
+        <div style="color: black; background-color: darkgrey; border-radius: 10px; padding: 10px 10px; margin-bottom: 15px;">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 fst-italic">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Bienvenidos al foro de EcoAgro!</font>
+                    </font>
+                </h1>
+                <p class="lead my-3">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">En esta comunidad trataremos sobre huertas ecologicas,
+                            Nuestra misión es poder alimentar a
+                            cada vez más personas con productos de excelente calidad que no contengan agroquímicos y que
+                            sigan los ciclos naturales de las estaciones</font>
+                    </font>
+                </p>
+                <p class="lead mb-0"><a href="#" class="text-white fw-bold">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Sigue leyendo...</font>
+                        </font>
+                    </a></p>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="table-responsive">
-            <table class="tabla">
-                <thead>
-                    <tr class="table">
 
-                        <th colspan="2" class="tituloTabla">Foro agricultores</th>
+        <!-- <div th:replace="/fragments/TarjetaPosteo::TarjetaPosteo" </div>  -->
 
-                    </tr>
-                    <tr></tr>
-                </thead>
-                <tbody>
-                    <tr th:each="noticia: ${noticias}">
-                        <td>
-                            <a href="/noticia/noticiaCompleta/__${noticia}__" type="POST" class="body"
-                                style="text-decoration: none;">
-                                <div class="bloque" style="margin: 0px">
-                                    <h4 th:text="${noticia.titulo}">jansdjfa</h4>
-                                    <p th:text="${noticia.cuerpo}">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. Quis sunt quaerat tenetur ipsum ullam consequatur ad debitis pariatur?
-                                        Reprehenderit earum cum repellat sapiente, esse architecto ab neque facere culpa
-                                        nihil!</p>
-                                </div>
-                            </a>
-                        </td>
+        <!-------------------------ETIQUETAS POSTEOS---------------------------------------------------------------->
 
-                        <td>
-                            <img class="imagenPubli" th:src="@{/foto/fotografias/__${noticia.foto.id}__}" alt="">
-                        </td>
-                    </tr>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;"></font>
+                            </font>
+                        </strong>
+                        <h3 class="mb-0">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Publicación destacada</font>
+                            </font>
+                        </h3>
+                        <div class="mb-1 text-muted">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">12 de noviembre</font>
+                            </font>
+                        </div>
+                        <p class="card-text mb-auto">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Esta es una tarjeta más amplia con texto de apoyo
+                                    a continuación como una introducción natural a contenido adicional.</font>
+                            </font>
+                        </p>
+                        <a href="#" class="stretched-link">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">sigue leyendo</font>
+                            </font>
+                        </a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                            role="img" aria-label="Marcador de posición: Miniatura" preserveAspectRatio="xMidYMid slice"
+                            focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                                dy=".3em">Thumbnail</text>
+                        </svg>
 
-                </tbody>
-            </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Diseño</font>
+                            </font>
+                        </strong>
+                        <h3 class="mb-0">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Título de la entrada</font>
+                            </font>
+                        </h3>
+                        <div class="mb-1 text-muted">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">11 de noviembre</font>
+                            </font>
+                        </div>
+                        <p class="mb-auto">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Esta es una tarjeta más amplia con texto de apoyo
+                                    a continuación como una introducción natural a contenido adicional.</font>
+                            </font>
+                        </p>
+                        <a href="#" class="stretched-link">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">sigue leyendo</font>
+                            </font>
+                        </a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                            role="img" aria-label="Marcador de posición: Miniatura" preserveAspectRatio="xMidYMid slice"
+                            focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                                dy=".3em">Thumbnail</text>
+                        </svg>
+
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+
+
+        <!---------------------- aca empieza barra de tareas--------------------------------------------------------------->
+        <nav class="navbar navbar-expand-lg bg-light" style="border-top: black solid 1px;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/foro/crearPost"> + Nuevo post</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li style="width: 150px;" class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Los mas picantes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Los mas recientes</a>
+                        </li>
+                       <li>
+                            <select class="nav-link dropdown-toggle" th:object="${c}" id="selectCategoria"
+                                        style="border-radius: 5%;" aria-label=".form-select-lg example">
+                                        <option selected>Buscar por categorias</option>
+                                        <option th:each="c : ${categorias}" th:value="${c.idCategorias}"
+                                            th:text="${c.nombre}"></option>
+                                    </select>
+                        </li>
+
+                        <li>
+                            <form class="d-flex" role="search">
+                                <input style="margin-left: 100px; margin-right: 0px; width: 350px;"
+                                    class="form-control me-2" type="search"
+                                    placeholder="buscas un usuario en particular?" aria-label="Search">
+                                <button style="width: 80px ;" id="modificarBoton" type="submit">Buscar</button>
+                            </form>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+        <!---------------------------------------aca termina -------------->
+        <div class="row g-5">
+
+
+
+            <div class="col-md-8">
+
+
+                <div class="container">
+                    <div class="table-responsive">
+                        <table class="tabla">
+                            <thead>
+                                <tr class="table">
+
+                                    <th colspan="2" class="tituloTabla">Foro agricultores</th>
+
+                                </tr>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="p: ${posteos}">
+                                    <td>
+                                        <a href="/imagen/post/__${noticia}__" type="POST" class="body"
+                                            style="text-decoration: none;">
+                                            <div class="bloque" style="margin: 0px">
+                                                <h4 th:text="${p.titulo}"></h4>
+                                                <p th:text="${p.posteoTexto}"></p>
+                                            </div>
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        <img class="imagenPubli" th:src=@{/imagen/post/__${p.idPosteo}__} alt="">
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+
+        </div>
+        </div>
+        </div>
+
+    </main>
+
+
+
+
+
 
     <!--Footer-->
     <div th:replace="/fragments/Footer::FooterGenerico" </div>

@@ -1,7 +1,7 @@
-
 package com.EcoAgro.EcoAgro.Servicios;
 
 import com.EcoAgro.EcoAgro.Entidades.Categorias;
+import com.EcoAgro.EcoAgro.Entidades.Imagen;
 import com.EcoAgro.EcoAgro.Entidades.Posteos;
 import com.EcoAgro.EcoAgro.Entidades.Usuarios;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
@@ -11,10 +11,10 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PosteosServicios {
-    
     
     @Autowired
     private PosteosRepositorio pR;
@@ -25,29 +25,31 @@ public class PosteosServicios {
     @Autowired
     private CategoriasServicios cS;
     
+    @Autowired
+    ImagenesServicios imagenesServicios;
+    
     @Transactional
-    public void crearPosteo(String IdUsuario, String titulo, String idCategoria,
-            String posteoTexto) throws Excepciones{
+    public void crearPosteo(Usuarios usuario, String titulo, Categorias categoria,
+            String posteoTexto, MultipartFile archivo) throws Excepciones {
         Posteos p = new Posteos();
-        Usuarios u = uS.ObtenerUsuariosPorId(IdUsuario);
-        Categorias c = cS.ObtenerCategoriaPorId(titulo);
+        Imagen imagen = imagenesServicios.guardarImagen(archivo);
         
         p.setTitulo(titulo);
         p.setPosteoTexto(posteoTexto);
-        p.setUsuario(u);
-        p.setCategoria(c);
-        //Por defecto
+        p.setUsuario(usuario);
+        p.setCategoria(categoria);
+        p.setImagen(imagen);
         p.setMeGusta(0);
         p.setCompartidos(0);
         p.setVisualizaciones(0);
         p.setActivoSiNo(true);
         
         pR.save(p);
-    } 
+    }
     
     @Transactional
     public void modificarPosteo(String IdPosteo, String titulo,
-        String posteoTexto){
+            String posteoTexto) {
         
         Posteos p = ObtenerPosteosPorId(IdPosteo);
         p.setTitulo(titulo);
@@ -57,28 +59,32 @@ public class PosteosServicios {
     }
     
     @Transactional
-    public void darDeBaja(String IdPosteo){
+    public void cambiarEstadoActivo(String IdPosteo) {
         Posteos p = ObtenerPosteosPorId(IdPosteo);
-        p.setActivoSiNo(false);
+        
+        if (p.getActivoSiNo() == true) {
+            p.setActivoSiNo(true);
+        } else {
+            p.setActivoSiNo(false);
+        }
+        
         pR.save(p);
     }
-  
+    
     @Transactional
-    public void eliminarPosteo(String IdPosteo){
+    public void eliminarPosteo(String IdPosteo) {
         
         Posteos p = ObtenerPosteosPorId(IdPosteo);
         pR.delete(p);
     }
     
-    
-    
     public Posteos ObtenerPosteosPorId(String id) {
-
+        
         Optional<Posteos> p = pR.findById(id);
-
+        
         if (p.isPresent()) {
             return p.get();
-
+            
         } else {
             return null;
         }
@@ -92,7 +98,7 @@ public class PosteosServicios {
         if (posteoTexto.equalsIgnoreCase("")) {
             throw new Excepciones("El Posteo debe incluir una oración al menos.");
         }
-
+        
     }
     
 }

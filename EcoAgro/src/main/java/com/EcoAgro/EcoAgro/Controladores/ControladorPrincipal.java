@@ -4,6 +4,8 @@ import com.EcoAgro.EcoAgro.Entidades.Usuarios;
 import com.EcoAgro.EcoAgro.Entidades.Zonas;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
+import com.EcoAgro.EcoAgro.Repositorios.CultivosRepositorio;
+import com.EcoAgro.EcoAgro.Servicios.CultivosServicios;
 import com.EcoAgro.EcoAgro.Servicios.EventosServicios;
 import com.EcoAgro.EcoAgro.Servicios.UsuariosServicios;
 import com.EcoAgro.EcoAgro.Servicios.ZonasServicios;
@@ -34,28 +36,19 @@ public class ControladorPrincipal {
     @Autowired
     EventosServicios eS;
 
+    @Autowired
+    CultivosRepositorio clR;
+
     // @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")
     @GetMapping("/PaginaPrincipal")
     public String PaginaPrincipal(ModelMap modelo, HttpSession session) throws Excepciones {
 
         Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
-        Integer numero;
-        if (logueado != null) {
 
-            if (logueado.getRol().toString().equals("ADMINISTRADOR")) {
-                modelo.put("sesion", "admin");
+        modelo.put("noticias", clR.Obtener3Noticias());
 
-                return "index.html";
+        return "index.html";
 
-            } else {
-
-                return "index.html";
-            }
-
-        } else {
-
-            return "index.html";
-        }
     }
 
     // @PreAuthorize("HasAnyRole('ROLE.ADMINISTRADOR','ROLE.PRODUCTOR')")

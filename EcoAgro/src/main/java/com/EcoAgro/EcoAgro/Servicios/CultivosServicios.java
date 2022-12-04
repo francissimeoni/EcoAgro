@@ -3,6 +3,7 @@ package com.EcoAgro.EcoAgro.Servicios;
 import com.EcoAgro.EcoAgro.Entidades.Categorias;
 import com.EcoAgro.EcoAgro.Entidades.Cultivos;
 import com.EcoAgro.EcoAgro.Entidades.Imagen;
+import com.EcoAgro.EcoAgro.Entidades.Zonas;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import com.EcoAgro.EcoAgro.Repositorios.CategoriaRepositorio;
 import com.EcoAgro.EcoAgro.Repositorios.CultivosRepositorio;
@@ -18,28 +19,28 @@ import org.springframework.web.multipart.MultipartFile;
 public class CultivosServicios {
 
     @Autowired
-    private CultivosRepositorio cultivosRepositorio;
+    CultivosRepositorio cultivosRepositorio;
 
     @Autowired
-    private CategoriaRepositorio categoriaRepositorio;
+    CategoriaRepositorio categoriaRepositorio;
 
     @Autowired
-    private ImagenRepositorio imagenesRepositorio;
+    ImagenRepositorio imagenesRepositorio;
 
     @Autowired
-    private ImagenesServicios imagenesServicios;
+    ImagenesServicios imagenesServicios;
 
     @Autowired
-    private CategoriasServicios categoriasServicios;
+    CategoriasServicios categoriasServicios;
 
     @Transactional
     public void crearCultivo(String nombre,
-            String información, MultipartFile archivo) throws Excepciones {
+            String información, MultipartFile archivo, Zonas zona, Categorias categoria) throws Excepciones {
 
         Cultivos cultivo = new Cultivos();
-        Categorias categoria = categoriasServicios.crearCategoria(nombre);
         Imagen imagen = imagenesServicios.guardarImagen(archivo);
 
+        cultivo.setZona(zona);
         cultivo.setNombre(nombre);
         cultivo.setCategorias(categoria);
         cultivo.setImagen(imagen);
@@ -51,7 +52,7 @@ public class CultivosServicios {
 
     @Transactional
     public void modificarCultivo(String idCultivos, String nombre, String idCategorias,
-            String información, MultipartFile archivo) throws Excepciones {
+            String información, MultipartFile archivo, Zonas zona) throws Excepciones {
 
         Categorias categoria = new Categorias();
 
@@ -71,6 +72,8 @@ public class CultivosServicios {
                 idImagen = cultivo.getImagen().getId();
                 imagen = imagenesServicios.actualizarImagen(idImagen, archivo);
             }
+
+            cultivo.setZona(zona);
             cultivo.setNombre(nombre);
             cultivo.setCategorias(categoria);
             cultivo.setImagen(imagen);
@@ -95,6 +98,16 @@ public class CultivosServicios {
 
         return null;
 
+    }
+
+    public Cultivos ObtenerCultivoPorId(String id) {
+
+        Optional<Cultivos> opCultivos = cultivosRepositorio.findById(id);
+        if (opCultivos.isPresent()) {
+            return opCultivos.get();
+        } else {
+            return null;
+        }
     }
 
 }
