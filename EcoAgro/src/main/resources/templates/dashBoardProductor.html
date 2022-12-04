@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/css/usuario.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="/css/Styles.css">
   <link rel='stylesheet' type='text/css' media='screen' href='/css/editarperfil.css'>
+  <link rel='stylesheet' type='text/css' media='screen' href='/css/tablaAux.css'>
   <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous">
   </script>
 </head>
@@ -36,7 +37,7 @@
     </div>
     <div class="perfil-usuario-body">
       <div class="perfil-usuario-bio">
-        <h3 class="titulo">Nombre </h3>
+        <h3 class="titulo">Bienvenidos: " <span th:text=${session.SesionDeUsuario.usuario}></span> "</h3>
         <input type="button" value="Editar perfil" onclick="location.href='/editarPerfil'" class="botones" />
         <input type="submit" value="Información posteos" class="botones" />
         <input type="submit" value="Cambio de usuario" class="botones" />
@@ -47,22 +48,41 @@
     </div>
     <div class="perfil-usuario-footer">
       <ul class="lista-datos">
-        <li><i class="fas fa-solid fa-globe icon"></i> Rol de usuario: <span
-            th:text="${session.SesionDeUsuario.rol}"></span></li>
+        <li><i class="fas fa-solid fa-globe icon"></i> Rol de usuario:" <span
+            th:text="${session.SesionDeUsuario.rol}"></span> "</li>
         <li><i class="fas fa-regular fa-compass icon"></i> Ciudad: <span
             th:text="${session.SesionDeUsuario.telefono}"></span></li>
-        <li><i class="fas fa-solid fa-seedling icon"></i> Cultivos del lugar:</li>
-        <li><i class="fas fa-envelope icon"></i> Correo Electronico:</li>
+        <li><i class="fas fa-solid fa-seedling icon"></i> Cultivos del lugar:<span
+            th:text="${session.SesionDeUsuario.telefono}"></span></li>
+        <li><i class="fas fa-envelope icon"></i> Correo Electronico:<span
+            th:text="${session.SesionDeUsuario.Correo}"></span></li>
       </ul>
 
     </div>
 
+    <br>
+
+    <div class="perfil-usuario-footer">
+     <!--<div th:replace="/fragments/tablaVisorEventos::visorDeEventos" </div>-->
+        <div th:replace="/fragments/tablaGestionDeUsuarios::gestionDeUsuarios" </div>
+
+
+      </div>
+
 
   </section>
-  <div th:replace="/fragments/Footer::FooterGenerico" </div>
+
+  <div id="visorDeEventos" th:replace="/fragments/Footer::FooterGenerico" </div>
 
 
 </body>
 
+<script>
+
+
+
+
+
+</script>
 
 </html>

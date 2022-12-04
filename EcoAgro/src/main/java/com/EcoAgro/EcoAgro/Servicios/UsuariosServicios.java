@@ -96,22 +96,12 @@ public class UsuariosServicios implements UserDetailsService {
     }
 
     @Transactional
-    public void cambiarRol(String rol, String idUsuario) throws Excepciones {
+    public void cambiarRol(Rol rol, String idUsuario) throws Excepciones {
 
         Usuarios u = new Usuarios();
         u = ObtenerUsuariosPorId(idUsuario);
 
-        if (rol.equalsIgnoreCase("ADMINISTRADOR")) {
-            u.setRol(Rol.ADMINISTRADOR);
-        }
-
-        if (rol.equalsIgnoreCase("PRODUCTOR")) {
-            u.setRol(Rol.PRODUCTOR);
-        }
-
-        if (rol.equalsIgnoreCase("USUARIO")) {
-            u.setRol(Rol.USUARIO);
-        }
+        u.setRol(rol);
 
         uR.save(u);
 
