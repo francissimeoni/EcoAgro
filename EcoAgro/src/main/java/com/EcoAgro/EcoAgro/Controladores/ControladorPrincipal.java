@@ -73,11 +73,10 @@ public class ControladorPrincipal {
             @RequestParam String email,
             @RequestParam String telefono, String zona, ModelMap modelo) throws Excepciones {
 
-        System.out.println(zona);
-
         try {
-            System.out.println("usr");
-            uS.CrearUsuario(usr, pass, Rol.USUARIO, zS.ObtenerDatosDeZonaPorId("1"),
+
+            System.out.println(usr + " " + pass + " " + " " + email + " " + telefono + " " + zona);
+            uS.CrearUsuario(usr, pass, Rol.ADMINISTRADOR, zS.ObtenerDatosDeZonaPorId(zona),
                     null, email, telefono, true);
             modelo.put("exito", "Usuario cargado con exito");
             return "UsuarioCargadoConExito.html";
@@ -93,6 +92,12 @@ public class ControladorPrincipal {
     public String Contacto(ModelMap modelo) {
 
         return "contacto.html";
+    }
+
+    @GetMapping("/perfil")
+    public String Perfil(ModelMap modelo) {
+
+        return "perfil.html";
     }
 
     @GetMapping("/editarPerfil")

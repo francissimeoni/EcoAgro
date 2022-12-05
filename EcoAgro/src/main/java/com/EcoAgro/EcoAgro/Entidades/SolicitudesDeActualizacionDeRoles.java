@@ -3,6 +3,7 @@ package com.EcoAgro.EcoAgro.Entidades;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,7 +25,9 @@ public class SolicitudesDeActualizacionDeRoles {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idSolicitud;
-    private String IdUsuario;
+    @OneToOne
+    private Usuarios usuario;
+
     private Rol rolSolicitado;
 
 }

@@ -1,6 +1,7 @@
 package com.EcoAgro.EcoAgro.Servicios;
 
 import com.EcoAgro.EcoAgro.Entidades.SolicitudesDeActualizacionDeRoles;
+import com.EcoAgro.EcoAgro.Entidades.Usuarios;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import com.EcoAgro.EcoAgro.Repositorios.SolicitudesDeActualizacionDeRolesRepository;
@@ -19,11 +20,11 @@ public class SolicitudesDeActualizacionDeRolesServicio {
     EventosServicios eS;
 
     @Transactional
-    public void CrearSolicitud(String IdUsuario, Rol rol) {
+    public void CrearSolicitud(Usuarios usuario, Rol rol) {
 
         try {
             SolicitudesDeActualizacionDeRoles solicitud = new SolicitudesDeActualizacionDeRoles();
-            solicitud.setIdUsuario(IdUsuario);
+            solicitud.setUsuario(usuario);
             solicitud.setRolSolicitado(rol);
             sar.save(solicitud);
         } catch (Exception e) {
@@ -37,22 +38,15 @@ public class SolicitudesDeActualizacionDeRolesServicio {
     @Transactional
     public void EliminarSolicitud(String IdSolicitud) throws Excepciones {
 
-            //SolicitudesDeActualizacionDeRoles solicitud = new SolicitudesDeActualizacionDeRoles();
-            Optional<SolicitudesDeActualizacionDeRoles> op = sar.findById(IdSolicitud);
+        Optional<SolicitudesDeActualizacionDeRoles> op = sar.findById(IdSolicitud);
 
-            if (op.isPresent()) {
-                sar.delete(op.get());
-            } else {
-                
+        if (op.isPresent()) {
+            sar.delete(op.get());
+        } else {
+
             throw new Excepciones("No se encuentra usuario con esa id");
-            }
-
-    
+        }
 
     }
-    
-    
-    
-    
 
 }

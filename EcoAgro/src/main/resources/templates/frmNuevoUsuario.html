@@ -42,7 +42,7 @@
                     <option th:each="z : ${zonas}" th:value="${z.idZonas}" th:text="${z.nombre}"></option>
                 </select>
 
-                <input type="text" id="rs">
+                <input type="text" id="rs" name="zona" >
 
                 <div class="input-contenedor">
                     <i class="fas fa-regular fa-compass icon"></i>
@@ -76,7 +76,7 @@
 
                 <div class="input-contenedor">
                     <i class="fas fa-key icon"></i>
-                    <input id="ps2" type="text" name="email" placeholder="Repita la contraseña"
+                    <input id="ps2" type="text" placeholder="Repita la contraseña"
                         onkeyup="chequearIgualdadContraseña()" />
                 </div>
 
