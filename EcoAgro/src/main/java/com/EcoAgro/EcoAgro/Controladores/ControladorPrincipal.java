@@ -5,6 +5,7 @@ import com.EcoAgro.EcoAgro.Entidades.Zonas;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
 import com.EcoAgro.EcoAgro.Repositorios.CultivosRepositorio;
+import com.EcoAgro.EcoAgro.Repositorios.EventosRepositorio;
 import com.EcoAgro.EcoAgro.Servicios.CultivosServicios;
 import com.EcoAgro.EcoAgro.Servicios.EventosServicios;
 import com.EcoAgro.EcoAgro.Servicios.UsuariosServicios;
@@ -35,6 +36,9 @@ public class ControladorPrincipal {
 
     @Autowired
     EventosServicios eS;
+
+    @Autowired
+    EventosRepositorio eR;
 
     @Autowired
     CultivosRepositorio clR;
@@ -140,6 +144,15 @@ public class ControladorPrincipal {
         modelo.put("error", "Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
         eS.NuevoEvento("Error de usuario y contraseña, verifique los parametros y vuelva a intentarlo");
         return "iniciarsesion.html";
+
+    }
+
+    @GetMapping("/traerVisorDeEventos")
+    public String traerVisorDeEventos(ModelMap modelo) {
+
+
+        modelo.put("eventos", eR.findAll() );
+        return "tablaVisorEventos.html";
 
     }
 

@@ -35,21 +35,19 @@
     <div class="perfil-usuario-body">
       <div class="perfil-usuario-bio">
         <h3 class="titulo">Bienvenidos: " <span th:text=${session.SesionDeUsuario.usuario}></span> "</h3>
+       
         <input type="button" value="Editar perfil" onclick="location.href='/editarPerfil'" class="botones" />
-        <input type="submit" value="Información posteos" class="botones" onclick="activarTablaPosteos();" />
-        <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Actualizacion de roles" class="botones"
-          onclick="location.href='/Usuarios/actualizarRoles'" />
-        <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Visor de eventos" class="botones"
-          />
-        <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Alta/baja usuarios" class="botones"
-          />
-              
-          <select class="botones" onkeyup="comprobaciones();">
-            <option selected>Solicitar cambio de roles</option>
-            <option onclick="location.href='/Usuarios/SolicitarActualizacionDeRol/__${'USUARIO'}__'" >Solicitar rol estandar</option>
-            <option onclick="location.href='/Usuarios/SolicitarActualizacionDeRol/__${'PRODUCTOR'}__'" >Solicitar rol productor</option>
-            <option onclick="location.href='/Usuarios/SolicitarActualizacionDeRol/__${'ADMINISTRADOR'}__'" >Solicitar rol administrador</option>
-          </select>
+        <a class="botones" href="/Usuarios/SolicitarActualizacionDeRol">Información posteos</a>
+        <a href="/Usuarios/actualizarRoles" sec:authorize="hasAnyRole('ADMINISTRADOR')" class="botones">Actualizacion de roles</a>
+        <a href="/traerVisorDeEventos" type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')"  class="botones">Visor de eventos</a>Visor de eventos</a>
+        <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Alta/baja usuarios" class="botones"/>
+          <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Solicitar cambio de rol" class="botones"/>
+              <div id="Scr">
+                  <a href="/Usuarios/SolicitarActualizacionDeRol/__USUARIO__" type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')"  class="botones">"Solicitar rol estandar"</a>
+                <a href="/Usuarios/SolicitarActualizacionDeRol/__PRODUCTOR__" type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')"  class="botones">"Solicitar rol productor"</a>
+                <a href="/Usuarios/SolicitarActualizacionDeRol/__ADMINISTRADOR__" type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')"  class="botones">"Solicitar rol administrador"</a>
+           </div>
+     
             
       </div>
 
@@ -79,56 +77,7 @@
     <div th:replace="/fragments/Footer::FooterGenerico" </div>
     </div>
 
-    <script>
-
-
-
-      var tablaGestionUsuario = document.getElementById('tablaGestionUsuario');
-      var tablaAltaBajaUsuarios = document.getElementById('tablaAltaBajaUsuarios');
-      var tablaPosteos = document.getElementById('tablaPosteos');
-      var tablaVisorEventos = document.getElementById('tablaVisorEventos');
-
-
-      tablaGestionUsuario.hidden = false;
-      tablaAltaBajaUsuarios.hidden = false;
-      tablaPosteos.hidden = false;
-      tablaVisorEventos.hidden = false;
-
-      function desactivarTablas() {
-        tablaGestionUsuario.hidden = true;
-        tablaAltaBajaUsuarios.hidden = true;
-        tablaPosteos.hidden = true;
-        tablaVisorEventos.hidden = true;
-      }
-
-      function activarTablaGestionUsuario() {
-        desactivarTablas();
-        tablaGestionUsuario.hidden = false;
-
-      }
-
-      function activarTablaAltaBajaUsuarios() {
-        desactivarTablas();
-        tablaAltaBajaUsuarios.hidden = true;
-      }
-
-      function activarTablaPosteos() {
-        desactivarTablas()
-        tablaPosteos.hidden = false;
-
-      }
-
-      function activarTablaVisorEventos() {
-        desactivarTablas()
-        tablaVisorEventos.hidden = false;
-
-      }
-
-
-
-
-
-    </script>
+  
 
 </body>
 

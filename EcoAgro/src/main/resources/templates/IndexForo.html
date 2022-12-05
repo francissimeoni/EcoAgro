@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/Styles.css">
     <link rel="stylesheet" href="/css/estilo_info.css">
     <link rel="stylesheet" href="/css/Indexforo.css">
+    
     <script src="https://kit.fontawesome.com/ddfaf76dbb.js" crossorigin="anonymous"></script>
 </head>
 
@@ -27,7 +28,7 @@
 
         <header th:replace="/fragments/header::header"></header>
     </div>
-<!-- 
+    <!-- 
     <header sec:authorize="hasAnyRole('ADMINISTRADOR', 'PRODUCTOR')"
         th:replace="/fragments/HeaderLogueado::headerLogueado">
     </header> -->
@@ -38,7 +39,8 @@
     <!-------------------------------------------------->
 
     <main class="container">
-        <div style="color: black; background-color: darkgrey; border-radius: 10px; padding: 10px 10px; margin-bottom: 15px;">
+        <div
+            style="color: black; background-color: darkgrey; border-radius: 10px; padding: 10px 10px; margin-bottom: 15px;">
             <div class="col-md-6 px-0">
                 <h1 class="display-4 fst-italic">
                     <font style="vertical-align: inherit;">
@@ -172,13 +174,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Los mas recientes</a>
                         </li>
-                       <li>
+                        <li>
                             <select class="nav-link dropdown-toggle" th:object="${c}" id="selectCategoria"
-                                        style="border-radius: 5%;" aria-label=".form-select-lg example">
-                                        <option selected>Buscar por categorias</option>
-                                        <option th:each="c : ${categorias}" th:value="${c.idCategorias}"
-                                            th:text="${c.nombre}"></option>
-                                    </select>
+                                style="border-radius: 5%;" aria-label=".form-select-lg example">
+                                <option selected>Buscar por categorias</option>
+                                <option th:each="c : ${categorias}" th:value="${c.idCategorias}" th:text="${c.nombre}">
+                                </option>
+                            </select>
                         </li>
 
                         <li>
@@ -195,57 +197,72 @@
             </div>
         </nav>
 
-        <!---------------------------------------aca termina -------------->
-        <div class="row g-5">
 
 
+        <div class="perfil-usuario-body">
 
-            <div class="col-md-8">
+            <div class="perfil-usuario-bio">
 
 
-                <div class="container">
-                    <div class="table-responsive">
-                        <table class="tabla">
-                            <thead>
-                                <tr class="table">
+                <H4 Style="width: 100%; color: black; text-align: center;">ULTIMOS POSTEOS REALIZADOS</H4>
 
-                                    <th colspan="2" class="tituloTabla">Foro agricultores</th>
+                    <table Style="width: 100%; border: none;">
 
-                                </tr>
-                                <tr></tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="p: ${posteos}">
+                        <th>
+                            <tr>
+
+                                <td>
+                                    <h5><span class="badge bg-secondary">IMAGEN</span></h5>
+                                </td>
+                                <td>
+                                    <h5><span class="badge bg-secondary">TITULO Y DESCRIPCION </span></h5>
+                                </td>
+                                <td>
+                                    <h5><span class="badge bg-secondary"></span></h5>
+                                </td>
+                            </tr>
+                        </th>
+
+                        <tbody>
+
+                            <tr th:each="p: ${posteos}">
+                                <a href="/imagen/post/__${noticia}__" type="POST" style="text-decoration: none;">
+
+                                    <td style="padding: 15px 6px ; width: 10%;">
+
+                                        <img style="border-radius: 10px;" class="imagenPubli"
+                                            th:src=@{/imagen/post/__${p.idPosteo}__} alt=""> <br>
+
+                                        <span style="color: green;" th:text="${p.usuario.usuario}"></span>
+                                    </td>
+
+
                                     <td>
-                                        <a href="/imagen/post/__${noticia}__" type="POST" class="body"
-                                            style="text-decoration: none;">
-                                            <div class="bloque" style="margin: 0px">
-                                                <h4 th:text="${p.titulo}"></h4>
-                                                <p th:text="${p.posteoTexto}"></p>
-                                            </div>
-                                        </a>
+                                        <div class="bloque" style="margin: 0px; width: 80%;">
+                                            <h4 style="border-bottom: rgb(209, 206, 206) solid 1px; font-weight: bolder;"
+                                                th:text="${p.titulo}"></h4>
+                                            <p th:text="${p.posteoTexto}"></p>
+                                        </div>
                                     </td>
 
                                     <td>
-                                        <img class="imagenPubli" th:src=@{/imagen/post/__${p.idPosteo}__} alt="">
+                                        <a Style="margin-left: 30%" class="botones">Ir a posteo</a>
                                     </td>
-                                </tr>
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                </a>
 
+                            </tr>
+
+
+                        </tbody>
+
+
+                    </table>
 
 
             </div>
-
-
-
-
         </div>
-        </div>
-        </div>
+
 
     </main>
 

@@ -55,21 +55,20 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/SolicitarActualizacionDeRol/{rolU}")
-    public String actualizarRol(@PathVariable String rolU, ModelMap modelo, @RequestParam String IdUsuario,
-            @RequestParam String rol,
-            HttpSession session) {
+    public String actualizarRol(@PathVariable String rolU, ModelMap modelo, HttpSession session) {
 
+        System.out.println(rolU);
         Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
 
-        if (rolU.equalsIgnoreCase("ADMINISTRADOR")) {
+        if (rolU.equalsIgnoreCase("__ADMINISTRADOR__")) {
             sarS.CrearSolicitud(logueado, Rol.ADMINISTRADOR);
         }
 
-        if (rolU.equalsIgnoreCase("PRODUCTOR")) {
+        if (rolU.equalsIgnoreCase("__PRODUCTOR__")) {
             sarS.CrearSolicitud(logueado, Rol.PRODUCTOR);
         }
 
-        if (rolU.equalsIgnoreCase("USUARIO")) {
+        if (rolU.equalsIgnoreCase("__USUARIO__")) {
             sarS.CrearSolicitud(logueado, Rol.USUARIO);
         }
 
