@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es" html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
@@ -21,9 +23,12 @@
 <body>
 
 
-
-  <header   th:replace="/fragments/HeaderLogueado::headerLogueado"></header>
-  
+  <div th:if="${sesion != 'admin'}">
+    <header th:replace="/fragments/header::header"></header>
+  </div>
+  <header sec:authorize="hasAnyRole('ADMINISTRADOR', 'PRODUCTOR')"
+    th:replace="/fragments/HeaderLogueado::headerLogueado"></header>
+  </head>
 
 
   <section class="seccion-perfil-usuario">
@@ -38,29 +43,19 @@
         <input type="button" value="Editar perfil" onclick="location.href='/editarPerfil'" class="botones" />
         <input type="submit" value="Información posteos" class="botones" onclick="activarTablaPosteos();" />
         <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Actualizacion de roles" class="botones"
-          onclick="location.href='/Usuarios/actualizarRoles'" />
+          onclick="activarTablaGestionUsuario();" />
         <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Visor de eventos" class="botones"
-          />
+          onclick="activarTablaVisorEventos();" />
         <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Alta/baja usuarios" class="botones"
-          />
-              
-          <select class="botones" onkeyup="comprobaciones();">
-            <option selected>Solicitar cambio de roles</option>
-            <option onclick="location.href='/Usuarios/SolicitarActualizacionDeRol/__${'USUARIO'}__'" >Solicitar rol estandar</option>
-            <option onclick="location.href='/Usuarios/SolicitarActualizacionDeRol/__${'PRODUCTOR'}__'" >Solicitar rol productor</option>
-            <option onclick="location.href='/Usuarios/SolicitarActualizacionDeRol/__${'ADMINISTRADOR'}__'" >Solicitar rol administrador</option>
-          </select>
-            
+          onclick="activarTablaAltaBajaUsuarios();" />
       </div>
 
     </div>
     <div class="perfil-usuario-body">
       <div class="perfil-usuario-bio">
         <ul class="lista-datos">
-          <li><i class="fas fa-solid fa-globe icon"></i> Rol de usuario: <span
-              th:text="${session.SesionDeUsuario.rol}"></span> 
-          
-              <button></button></li>
+          <li><i class="fas fa-solid fa-globe icon"></i> Rol de usuario:" <span
+              th:text="${session.SesionDeUsuario.rol}"></span> "</li>
           <li><i class="fas fa-regular fa-compass icon"></i> Ciudad: <span
               th:text="${session.SesionDeUsuario.telefono}"></span></li>
           <li><i class="fas fa-solid fa-seedling icon"></i> Cultivos del lugar:<span
@@ -68,6 +63,42 @@
           <li><i class="fas fa-envelope icon"></i> Correo Electronico:<span
               th:text="${session.SesionDeUsuario.Correo}"></span></li>
         </ul>
+      </div>
+    </div>
+
+    <br>
+    <div class="perfil-usuario-body">
+      <div class="perfil-usuario-bio">
+
+        <H1>POSTEOS</H1>
+        <table>
+    
+            <th>
+                <tr>
+                    <td>fecha</td>
+                    <td>Usuario</td>
+                    <td>Acción</td>
+                </tr>
+            </th>
+    
+            <tbody>
+                <tr>
+                    <td>19/09/1990</td>
+                    <td>Descripcion de posteo Descripcion de posteo Descripcion de posteo </td>
+                    <td><button>activar</button><button>Desactivar</button></td>
+                </tr>
+    
+                <tr>
+                    <td>19/09/1990</td>
+                    <td>Descripcion de posteo Descripcion de posteo Descripcion de posteo </td>
+                    <td><button>activar</button><button>Desactivar</button></td>
+                </tr>
+            </tbody>
+    
+    
+        </table>
+    
+
       </div>
     </div>
 
@@ -79,58 +110,11 @@
     <div th:replace="/fragments/Footer::FooterGenerico" </div>
     </div>
 
-    <script>
-
-
-
-      var tablaGestionUsuario = document.getElementById('tablaGestionUsuario');
-      var tablaAltaBajaUsuarios = document.getElementById('tablaAltaBajaUsuarios');
-      var tablaPosteos = document.getElementById('tablaPosteos');
-      var tablaVisorEventos = document.getElementById('tablaVisorEventos');
-
-
-      tablaGestionUsuario.hidden = false;
-      tablaAltaBajaUsuarios.hidden = false;
-      tablaPosteos.hidden = false;
-      tablaVisorEventos.hidden = false;
-
-      function desactivarTablas() {
-        tablaGestionUsuario.hidden = true;
-        tablaAltaBajaUsuarios.hidden = true;
-        tablaPosteos.hidden = true;
-        tablaVisorEventos.hidden = true;
-      }
-
-      function activarTablaGestionUsuario() {
-        desactivarTablas();
-        tablaGestionUsuario.hidden = false;
-
-      }
-
-      function activarTablaAltaBajaUsuarios() {
-        desactivarTablas();
-        tablaAltaBajaUsuarios.hidden = true;
-      }
-
-      function activarTablaPosteos() {
-        desactivarTablas()
-        tablaPosteos.hidden = false;
-
-      }
-
-      function activarTablaVisorEventos() {
-        desactivarTablas()
-        tablaVisorEventos.hidden = false;
-
-      }
-
-
-
-
-
-    </script>
+  
 
 </body>
 
 
 </html>
+
+

@@ -27,6 +27,8 @@ body {
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
+  width: 
+  100%;
 }
 
 .seccion-perfil-usuario .perfil-usuario-header {

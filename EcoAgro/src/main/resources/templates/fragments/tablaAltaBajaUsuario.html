@@ -69,44 +69,42 @@
 
             <div class="perfil-usuario-bio">
 
-                <H1>tabla gestion usuarios</H1>
-
                 <table>
 
                     <th>
                         <tr>
+
                             <td>Usuario</td>
-                            <td>Rol solicitado</td>
+                            <td>Activo si/no</td>
                             <td>Acción</td>
                         </tr>
                     </th>
 
                     <tbody>
-                    
-                        <tr th:each="s : ${solicitudes}">
-                            <td th:text="${s.usuario.usuario}"></td>
-                            <td th:text="${s.rolSolicitado}"></td>
-                            <td><button>Aceptar</button><button>Negar</button></td>
+                        <tr>
+
+                            <td>Francis Simeoni </td>
+                            <td>Si</td>
+                            <td><button>Desactivar</button><button>Activar</button></td>
                         </tr>
 
-                   
+                        <tr>
+                            <td>Francis Simeoni </td>
+
+                            <td>No</td>
+                            <td><button>Desactivar</button><button>Activar</button></td>
+                        </tr>
                     </tbody>
 
 
                 </table>
-
-
             </div>
-        </div>
 
+        </div>
 
     </section>
 
 
-
-    <div>
-        <div th:replace="/fragments/Footer::FooterGenerico" </div>
-        </div>
 
 
 </body>

@@ -1,16 +1,21 @@
 package com.EcoAgro.EcoAgro.Controladores;
 
+import com.EcoAgro.EcoAgro.Entidades.Usuarios;
 import com.EcoAgro.EcoAgro.Entidades.Zonas;
 import com.EcoAgro.EcoAgro.Enums.Rol;
 import com.EcoAgro.EcoAgro.Excepciones.Excepciones;
+import com.EcoAgro.EcoAgro.Repositorios.SolicitudesDeActualizacionDeRolesRepository;
 import com.EcoAgro.EcoAgro.Servicios.SolicitudesDeActualizacionDeRolesServicio;
 import com.EcoAgro.EcoAgro.Servicios.UsuariosServicios;
 import com.EcoAgro.EcoAgro.Servicios.ZonasServicios;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,10 +26,15 @@ public class ControladorUsuario {
 
     @Autowired
     UsuariosServicios uS;
+
     @Autowired
     ZonasServicios zS;
+
     @Autowired
     SolicitudesDeActualizacionDeRolesServicio sarS;
+
+    @Autowired
+    SolicitudesDeActualizacionDeRolesRepository sarR;
 
     @GetMapping("/CrearUsuario")
     public String CrearUsuario(ModelMap modelo) {
@@ -44,19 +54,23 @@ public class ControladorUsuario {
 
     }
 
-    @GetMapping("/SolicitarActualizacionDeRol")
-    public String actualizarRol(ModelMap modelo, @RequestParam String IdUsuario, @RequestParam String rol) {
+    @GetMapping("/SolicitarActualizacionDeRol/{rolU}")
+    public String actualizarRol(@PathVariable String rolU, ModelMap modelo, @RequestParam String IdUsuario,
+            @RequestParam String rol,
+            HttpSession session) {
 
-        if (rol.equalsIgnoreCase("ADMINISTRADOR")) {
-            sarS.CrearSolicitud(IdUsuario, Rol.ADMINISTRADOR);
+        Usuarios logueado = (Usuarios) session.getAttribute("SesionDeUsuario");
+
+        if (rolU.equalsIgnoreCase("ADMINISTRADOR")) {
+            sarS.CrearSolicitud(logueado, Rol.ADMINISTRADOR);
         }
 
-        if (rol.equalsIgnoreCase("PRODUCTOR")) {
-            sarS.CrearSolicitud(IdUsuario, Rol.PRODUCTOR);
+        if (rolU.equalsIgnoreCase("PRODUCTOR")) {
+            sarS.CrearSolicitud(logueado, Rol.PRODUCTOR);
         }
 
-        if (rol.equalsIgnoreCase("USUARIO")) {
-            sarS.CrearSolicitud(IdUsuario, Rol.USUARIO);
+        if (rolU.equalsIgnoreCase("USUARIO")) {
+            sarS.CrearSolicitud(logueado, Rol.USUARIO);
         }
 
         return "frmNuevoUsuario.html";
@@ -64,7 +78,9 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/gestionarRol")
-    public void gestionarRol(ModelMap modelo, @RequestParam String IdUsuario, @RequestParam String rol, Boolean AutorizoSiNo) throws Excepciones {
+    public void gestionarRol(ModelMap modelo, @RequestParam String IdUsuario,
+            @RequestParam String rol,
+            Boolean AutorizoSiNo) throws Excepciones {
 
         if (AutorizoSiNo == true) {
 
@@ -105,5 +121,12 @@ public class ControladorUsuario {
             }
 
         }
+    }
+
+    @GetMapping("/actualizarRoles")
+    public String actualizarRoles(ModelMap modelo) {
+
+        modelo.put("solicitudes", sarR.findAll());
+        return "tablaGestionDeUsuarios.html";
     }
 }
