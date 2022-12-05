@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <meta name="viewport"
+        content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <link rel="stylesheet" href="/css/usuario.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/Styles.css">
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/editarperfil.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/tablaAux.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous">
+         
+    </script>
+</head>
+
+<body>
+
+
+    <section class="seccion-perfil-usuario">
+        <div class="perfil-usuario-header">
+    
+    
+        </div>
+        </div>
+        <div class="perfil-usuario-body">
+          <div class="perfil-usuario-bio">
+            <h3 class="titulo">Bienvenidos: " <span th:text=${session.SesionDeUsuario.usuario}></span> "</h3>
+           
+            <input type="button" value="Editar perfil" onclick="location.href='/editarPerfil'" class="botones" />
+            <a class="botones" href="/Usuarios/SolicitarActualizacionDeRol">Información posteos</a>
+          <a href="/Usuarios/actualizarRoles" sec:authorize="hasAnyRole('ADMINISTRADOR')" class="botones">Actualizacion de roles</a>
+            <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Visor de eventos" class="botones"/>
+            <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Alta/baja usuarios" class="botones"/>
+              <input type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')" value="Solicitar cambio de rol" class="botones"/>
+                  <div id="Scr">
+                      <a href="/Usuarios/SolicitarActualizacionDeRol/__USUARIO__" type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')"  class="botones">"Solicitar rol estandar"</a>
+                    <a href="/Usuarios/SolicitarActualizacionDeRol/__PRODUCTOR__" type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')"  class="botones">"Solicitar rol productor"</a>
+                    <a href="/Usuarios/SolicitarActualizacionDeRol/__ADMINISTRADOR__" type="submit" sec:authorize="hasAnyRole('ADMINISTRADOR')"  class="botones">"Solicitar rol administrador"</a>
+               </div>
+         
+                
+          </div>
+    
+        </div>
+        <div class="perfil-usuario-body">
+          <div class="perfil-usuario-bio">
+            <ul class="lista-datos">
+              <li><i class="fas fa-solid fa-globe icon"></i> Rol de usuario: <span
+                  th:text="${session.SesionDeUsuario.rol}"></span> 
+              
+                  <button></button></li>
+              <li><i class="fas fa-regular fa-compass icon"></i> Ciudad: <span
+                  th:text="${session.SesionDeUsuario.telefono}"></span></li>
+              <li><i class="fas fa-solid fa-seedling icon"></i> Cultivos del lugar:<span
+                  th:text="${session.SesionDeUsuario.telefono}"></span></li>
+              <li><i class="fas fa-envelope icon"></i> Correo Electronico:<span
+                  th:text="${session.SesionDeUsuario.Correo}"></span></li>
+            </ul>
+          </div>
+        </div>
+    
+     
+        <div class="perfil-usuario-body">
+            
+            <div class="perfil-usuario-bio">
+
+                
+                <H4 Style="width: 100%; color: black; text-align: center;">SOLICITUD DE CAMBIO DE ROLES DE USUARIOS</H1>
+
+                <table Style="width: 100%; border: none;" >
+
+                    <th>
+                        <tr>
+                            <td hidden="TRUE">
+                                <h5 ><span class="badge bg-secondary">ID USUARIO</span></h5>
+                            </td>
+                            <td>
+                                <h5><span class="badge bg-secondary">USUARIO</span></h5>
+                            </td>
+                            <td>
+                                <h5><span class="badge bg-secondary">ROL SOLICITADO</span></h5>
+                            </td>
+                            <td>
+                                <h5><span class="badge bg-secondary">ACCIÓN</span></h5>
+                            </td>
+                        </tr>
+                    </th>
+
+                    <tbody>
+                    
+                        <tr th:each="s : ${solicitudes}">
+                            <td hidden="TRUE" th:text="${s.usuario.idUsuario}"></td>
+                            <td th:text="${s.usuario.usuario}"></td>
+                            <td th:text="${s.rolSolicitado}"></td>
+                            <td>
+                                
+                                <a th:href="@{/concederRol/__${s.usuario.idUsuario}__}" Style="margin-left: 35%" class="botones">Conceder</a>
+                                <a class="botones">Negar</a>
+                            </td>
+                        </tr>
+
+                   
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+    <div>
+        <div th:replace="/fragments/Footer::FooterGenerico" </div>
+        </div>
+
+
+</body>
+
+
+</html>
